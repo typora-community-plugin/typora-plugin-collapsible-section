@@ -63,12 +63,22 @@ export default class extends Plugin {
 function makeCollapsible(heading: HTMLElement) {
   if (heading.querySelector('.typ-collapsible-btn')) return
 
-  $('<button class="typ-collapsible-btn" contenteditable="false"><span class="fa fa-caret-down"></span></button>')
+  const button = $(`<button class="typ-collapsible-btn" contenteditable="false"><span class="fa fa-caret-down"></span></button>`)
+    .on('click', toggleIcon)
     .on('click', toggleCollapse)
-    .on('click', function () {
-      $(this).find('.fa').toggleClass('fa-caret-down').toggleClass('fa-caret-right')
-    })
     .prependTo(heading)
+    .get(0)
+
+  if (heading.nextElementSibling?.classList.contains('typ-hidden')) {
+    heading.classList.add('typ-folded')
+    toggleIcon.apply(button)
+  }
+}
+
+function toggleIcon() {
+  $(this).find('.fa')
+    .toggleClass('fa-caret-down')
+    .toggleClass('fa-caret-right')
 }
 
 function toggleCollapse() {
