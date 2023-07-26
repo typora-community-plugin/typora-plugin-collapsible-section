@@ -1,0 +1,27 @@
+.md-heading:has(> .typ-collapsible-btn:first-child:last-child)::after {
+  content: '\200B';
+}
+
+.typ-collapsible-btn {
+  position: absolute;
+  left: -16px;
+  bottom: 0;
+  border: none;
+  border-radius: 0.25em;
+  color: gray;
+
+  .fa {
+    font-size: 12px;
+    vertical-align: middle;
+  }
+}
+
+.typ-folded::after {
+  content: "\22EF";
+  padding: .5rem;
+  color: gray;
+}
+
+.typ-hidden {
+  display: none;
+}

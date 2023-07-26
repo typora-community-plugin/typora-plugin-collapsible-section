@@ -1,0 +1,10 @@
+{
+  "id": "typora-community-plugin.collapsible-section",
+  "name": "Collapsible Section",
+  "description": "Fold/unfold markdown section.",
+  "author": "plylrnsdy",
+  "authorUrl": "https://github.com/plylrnsdy",
+  "version": "1.0.0",
+  "minAppVersion": "1.5.0",
+  "minCoreVersion": "2.0.0-beta.3"
+}

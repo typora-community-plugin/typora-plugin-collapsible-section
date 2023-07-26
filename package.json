@@ -1,0 +1,31 @@
+{
+  "private": true,
+  "name": "typora-plugin-collapsible-section",
+  "version": "",
+  "description": "",
+  "type": "module",
+  "main": "",
+  "scripts": {
+    "build:dev": "node build.js",
+    "build": "node build.js --prod",
+    "pack": "pnpm run build && node pack.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/extract-zip": "1.6.2",
+    "@types/glob": "7.2.0",
+    "@types/jquery": "3.3.1",
+    "@types/lodash": "~4.14.195",
+    "@types/node": "16.18.0",
+    "@types/typora": "npm:@typora-community-plugin/typora-types@^1.0.0",
+    "@types/yauzl": "2.10.0",
+    "@typora-community-plugin/core": "^2.0.0-beta.2",
+    "archiver": "^5.3.1",
+    "esbuild": "^0.18.16",
+    "esbuild-plugin-typora": "npm:@typora-community-plugin/esbuild-plugin-typora@^1.0.2",
+    "esbuild-sass-plugin": "^2.10.0",
+    "iconv-lite": "0.6.3"
+  }
+}
