@@ -10,4 +10,4 @@
 
 ## 预览
 
-![](https://fastly.jsdelivr.net/gh/typora-community-plugin/typora-plugin-collapsible-section@main/docs/assets/base.jpg)
+![](./docs/assets/base.jpg)
