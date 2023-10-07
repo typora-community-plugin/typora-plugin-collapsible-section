@@ -7,6 +7,7 @@ This a plugin based on [typora-community-plugin](https://github.com/typora-commu
 Fold/unfold markdown section:
 
 - [x] Heading
+- [x] Nested list
 
 ## Preview
 

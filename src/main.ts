@@ -23,7 +23,7 @@ export default class extends Plugin {
   onload() {
     this.registerMarkdownPostProcessor(
       HtmlPostProcessor.from({
-        selector: '.md-heading:not(:empty)',
+        selector: '.md-heading:not(:empty), .md-list-item>:first-child:not(:last-child)',
         process: makeCollapsible,
       }))
 
@@ -60,17 +60,17 @@ export default class extends Plugin {
   }
 }
 
-function makeCollapsible(heading: HTMLElement) {
-  if (heading.querySelector('.typ-collapsible-btn')) return
+function makeCollapsible(el: HTMLElement) {
+  if (el.querySelector('.typ-collapsible-btn')) return
 
-  const button = $(`<button class="typ-collapsible-btn" contenteditable="false"><span class="fa fa-caret-down"></span></button>`)
+  const button = $(`<button class="typ-collapsible-btn" contenteditable="false" style="left: ${10 - clientOffset(el)}px;"><span class="fa fa-caret-down"></span></button>`)
     .on('click', toggleIcon)
     .on('click', toggleCollapse)
-    .prependTo(heading)
+    .prependTo(el)
     .get(0)
 
-  if (heading.nextElementSibling?.classList.contains('typ-hidden')) {
-    heading.classList.add('typ-folded')
+  if (el.nextElementSibling?.classList.contains('typ-hidden')) {
+    el.classList.add('typ-folded')
     toggleIcon.apply(button)
   }
 }
@@ -124,4 +124,14 @@ function headingState(el: HTMLElement): HeadingState {
 
 function fold(el: HTMLElement, states: HeadingState[]) {
   el.classList.toggle('typ-hidden', states.some(s => s.isFolded))
+}
+
+function clientOffset(el: HTMLElement) {
+  let result = 0;
+  let parent = el;
+  while (parent != editor.writingArea) {
+    result += parent.offsetLeft;
+    parent = parent.offsetParent as HTMLElement;
+  }
+  return result;
 }
