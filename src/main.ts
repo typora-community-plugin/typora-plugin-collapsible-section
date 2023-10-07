@@ -10,10 +10,14 @@ export default class extends Plugin {
   i18n = new I18n({
     resources: {
       'en': {
+        foldAll: 'Fold all',
+        unfoldAll: 'Unfold all',
         foldAllHeadings: 'Fold all headings',
         unfoldAllHeadings: 'Unfold all headings',
       },
       'zh-cn': {
+        foldAll: '折叠所有',
+        unfoldAll: '展开所有',
         foldAllHeadings: '折叠所有标题',
         unfoldAllHeadings: '展开所有标题',
       },
@@ -28,23 +32,31 @@ export default class extends Plugin {
       }))
 
     this.registerCommand({
+      id: 'fold-all',
+      title: this.i18n.t.foldAll,
+      scope: 'editor',
+      callback: () => foldAll('', true),
+    })
+
+    this.registerCommand({
+      id: 'unfold-all',
+      title: this.i18n.t.unfoldAll,
+      scope: 'editor',
+      callback: () => foldAll('', false),
+    })
+
+    this.registerCommand({
       id: 'fold-all-headings',
       title: this.i18n.t.foldAllHeadings,
       scope: 'editor',
-      callback: () => {
-        editor.writingArea.querySelectorAll(':not(.typ-folded) .typ-collapsible-btn')
-          .forEach((btn: HTMLElement) => btn.click())
-      }
+      callback: () => foldAll('.md-heading', true),
     })
 
     this.registerCommand({
       id: 'unfold-all-headings',
       title: this.i18n.t.unfoldAllHeadings,
       scope: 'editor',
-      callback: () => {
-        editor.writingArea.querySelectorAll('.typ-folded .typ-collapsible-btn')
-          .forEach((btn: HTMLElement) => btn.click())
-      }
+      callback: () => foldAll('.md-heading', false),
     })
   }
 
@@ -73,6 +85,16 @@ function makeCollapsible(el: HTMLElement) {
     el.classList.add('typ-folded')
     toggleIcon.apply(button)
   }
+}
+
+function clientOffset(el: HTMLElement) {
+  let result = 0;
+  let parent = el;
+  while (parent != editor.writingArea) {
+    result += parent.offsetLeft;
+    parent = parent.offsetParent as HTMLElement;
+  }
+  return result;
 }
 
 function toggleIcon() {
@@ -126,12 +148,14 @@ function fold(el: HTMLElement, states: HeadingState[]) {
   el.classList.toggle('typ-hidden', states.some(s => s.isFolded))
 }
 
-function clientOffset(el: HTMLElement) {
-  let result = 0;
-  let parent = el;
-  while (parent != editor.writingArea) {
-    result += parent.offsetLeft;
-    parent = parent.offsetParent as HTMLElement;
+function foldAll(typeSelector: string, state: boolean) {
+  let stateCls = '.typ-folded'
+
+  if (state) {
+    // fold unfolded list
+    stateCls = `:not(${stateCls})`
   }
-  return result;
+
+  editor.writingArea.querySelectorAll(`${typeSelector}${stateCls} .typ-collapsible-btn`)
+    .forEach((btn: HTMLElement) => btn.click())
 }
