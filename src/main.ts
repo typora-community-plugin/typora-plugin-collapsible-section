@@ -1,4 +1,4 @@
-import * as _ from "lodash"
+import './style.scss'
 import { HtmlPostProcessor, I18n, Plugin } from '@typora-community-plugin/core'
 import { editor } from "typora"
 

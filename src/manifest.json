@@ -4,7 +4,9 @@
   "description": "Fold/unfold markdown section.",
   "author": "plylrnsdy",
   "authorUrl": "https://github.com/plylrnsdy",
-  "version": "1.1.0",
+  "repo": "typora-community-plugin/typora-plugin-collapsible-section",
+  "version": "1.2.0",
   "minAppVersion": "1.5.0",
-  "minCoreVersion": "2.0.0-beta.21"
+  "minCoreVersion": "2.0.0-beta.31",
+  "platforms": ["win32", "linux", "darwin"]
 }
