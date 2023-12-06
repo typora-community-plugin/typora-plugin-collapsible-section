@@ -25,7 +25,6 @@ const overrided = {
 
 await fs.rm('./dist', { recursive: true, force: true })
 await fs.mkdir('./dist')
-await fs.copyFile('./src/manifest.json', './dist/manifest.json')
 
 export default defineConfig({
   input: 'src/main.ts',
