@@ -33,6 +33,8 @@ if (IS_DEV) {
   const manifest = JSON.parse(await fs.readFile(manifestPath, 'utf8'))
 
   await fs.copyFile(manifestPath, './dist/manifest.json')
+  await fs.rename('./dist/main.css', './dist/style.css')
+  await fs.rename('./dist/main.css.map', './dist/style.css.map')
   await fs.cp('./dist', './test/vault/.typora/plugins/dist', { recursive: true })
   await fs.writeFile('./test/vault/.typora/plugins.json', JSON.stringify({ [manifest.id]: true }))
 
