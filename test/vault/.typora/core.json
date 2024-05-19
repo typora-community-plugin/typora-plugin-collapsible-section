@@ -1,8 +1,29 @@
 {
   "version": 1,
   "settings": {
+    "displayLang": "zh-cn",
     "githubProxy": "ghproxy",
+    "showNotSupportedFile": false,
+    "showSearchResultFullPath": false,
     "showRibbon": true,
-    "showFileTabs": true
+    "showFileTabs": true,
+    "openLinkInCurrentWin": true,
+    "quickOpenInCurrentWin": true,
+    "ignoreFile": true,
+    "ignoreFileGlob": ".git",
+    "ribbonState": {
+      "core.search": {
+        "visible": true,
+        "order": 0
+      },
+      "core.file-explorer": {
+        "visible": true,
+        "order": 1
+      },
+      "core.outline": {
+        "visible": true,
+        "order": 2
+      }
+    }
   }
 }

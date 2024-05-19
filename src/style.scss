@@ -1,3 +1,5 @@
+// ---------- Collapsible Section ----------
+
 .md-heading:has(> .typ-collapsible-btn:first-child:last-child)::after {
   content: '\200B';
 }
@@ -15,12 +17,40 @@
   }
 }
 
+// Folded section element, such as heading, list.
 .typ-folded::after {
   content: "\22EF";
   padding: .5rem;
   color: gray;
 }
 
+// Hide elements when folded, such as elements after heading & children of list.
 .typ-hidden {
   display: none;
+}
+
+// ---------- Collapsible Codeblock ----------
+
+.md-fences {
+
+  // Mark codeblock as handled by this plugin.
+  &.typ-collapsible-code {}
+
+  &.typ-folded-code {
+    &::before {
+      content: attr(lang);
+      padding: 0 0.5rem;
+      color: rgb(var(--typ-color-gray-2));
+    }
+
+    .CodeMirror-wrap {
+      max-height: 0;
+    }
+  }
+
+  &.typ-limited-code {
+    .CodeMirror-scroll {
+      overflow-y: scroll;
+    }
+  }
 }

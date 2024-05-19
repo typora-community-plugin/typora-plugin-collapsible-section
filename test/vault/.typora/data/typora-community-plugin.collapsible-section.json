@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "settings": {
+    "collapsableCodeblockMode": "fold",
+    "codeblockMaxHeight": "30vh"
+  }
+}
