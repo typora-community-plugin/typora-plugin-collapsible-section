@@ -1,5 +1,6 @@
 import './style.scss'
 import { I18n, Plugin, PluginSettings } from '@typora-community-plugin/core'
+import { editor } from 'typora'
 import { SectionToggler } from './features/section'
 import { CodeblockToggler } from './features/codeblock'
 import { CollapsibleSettingTab } from './setting-tab'
@@ -59,6 +60,8 @@ export default class extends Plugin<Settings> {
   })
 
   onload() {
+    const { t } = this.i18n
+
     this.registerSettings(
       new PluginSettings(this.app, this.manifest, {
         version: 1,
@@ -66,9 +69,36 @@ export default class extends Plugin<Settings> {
 
     this.settings.setDefault(DEFAULT_SETTINGS)
 
-    this.addChild(new SectionToggler(this))
-    this.addChild(new CodeblockToggler(this.app, this))
 
     this.registerSettingTab(new CollapsibleSettingTab(this))
+
+
+    const sectionToggler = new SectionToggler(this)
+    const codeblockToggler = new CodeblockToggler(this.app, this)
+
+    this.addChild(sectionToggler)
+    this.addChild(codeblockToggler)
+
+    this.registerCommand({
+      id: 'fold-all',
+      title: t.foldAll,
+      scope: 'editor',
+      callback: () => {
+        sectionToggler.foldAll('', true)
+        editor.writingArea.querySelectorAll('pre .fa-caret-down')
+          .forEach((el: HTMLElement) => el.click())
+      },
+    })
+
+    this.registerCommand({
+      id: 'unfold-all',
+      title: t.unfoldAll,
+      scope: 'editor',
+      callback: () => {
+        sectionToggler.foldAll('', false)
+        editor.writingArea.querySelectorAll('pre .fa-caret-up')
+          .forEach((el: HTMLElement) => el.click())
+      },
+    })
   }
 }

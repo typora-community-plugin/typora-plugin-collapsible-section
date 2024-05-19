@@ -25,20 +25,6 @@ export class SectionToggler extends Component {
       }))
 
     plugin.registerCommand({
-      id: 'fold-all',
-      title: t.foldAll,
-      scope: 'editor',
-      callback: () => foldAll('', true),
-    })
-
-    plugin.registerCommand({
-      id: 'unfold-all',
-      title: t.unfoldAll,
-      scope: 'editor',
-      callback: () => foldAll('', false),
-    })
-
-    plugin.registerCommand({
       id: 'fold-all-headings',
       title: t.foldAllHeadings,
       scope: 'editor',
@@ -63,6 +49,8 @@ export class SectionToggler extends Component {
     editor.writingArea.querySelectorAll('.typ-collapsible-btn')
       .forEach(el => el.remove())
   }
+
+  foldAll = foldAll
 }
 
 function makeCollapsible(el: HTMLElement) {
