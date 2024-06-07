@@ -1,6 +1,6 @@
 # Typora Plugin Collapsible Section
 
-[English](https://github.com/typora-community-plugin/typora-plugin-collapsible-section#README.md) | 简体中文
+[English](./README.md) | 简体中文
 
 这是一个基于 [typora-community-plugin][core] 开发的，适用于 [Typora](https://typora.io) 的插件。
 
@@ -9,6 +9,7 @@
 - [x] 根据标题折叠
 - [x] 嵌套列表折叠
 - [x] 代码块折叠
+- [x] 表格折叠
 
 ## 预览
 

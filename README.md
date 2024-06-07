@@ -1,6 +1,6 @@
 # Typora Plugin Collapsible Section
 
-English | [简体中文](https://github.com/typora-community-plugin/typora-plugin-collapsible-section/blob/main/README.zh-CN.md)
+English | [简体中文](./README.zh-CN.md)
 
 This a plugin based on [typora-community-plugin][core] for [Typora](https://typora.io).
 
@@ -9,6 +9,7 @@ Fold/unfold markdown section:
 - [x] Heading
 - [x] Nested list
 - [x] Codeblock
+- [x] Table
 
 ## Preview
 

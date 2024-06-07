@@ -4,6 +4,7 @@ import { editor } from 'typora'
 import { SectionToggler } from './features/section'
 import { CodeblockToggler } from './features/codeblock'
 import { CollapsibleSettingTab } from './setting-tab'
+import { TableToggler } from './features/table'
 
 
 interface Settings {
@@ -16,7 +17,7 @@ const DEFAULT_SETTINGS: Settings = {
   codeblockMaxHeight: '30vh',
 }
 
-export default class extends Plugin<Settings> {
+export default class CollapsibleSectionPlugin extends Plugin<Settings> {
 
   i18n = new I18n({
     resources: {
@@ -25,7 +26,6 @@ export default class extends Plugin<Settings> {
         unfoldAll: 'Unfold all',
         foldAllHeadings: 'Fold all headings',
         unfoldAllHeadings: 'Unfold all headings',
-        buttonToggler: 'Toggle code block',
 
         collapsibleCodeblockMode: {
           name: 'Collapsible code block mode',
@@ -35,15 +35,15 @@ export default class extends Plugin<Settings> {
           name: 'Code block max height',
           desc: 'Only works when mode `limit_height` is enabled',
         },
-
         codeblockFoldBtn: 'Fold/Unfold code block',
+
+        tableFoldBtn: 'Toggle table',
       },
       'zh-cn': {
         foldAll: '折叠所有',
         unfoldAll: '展开所有',
         foldAllHeadings: '折叠所有标题',
         unfoldAllHeadings: '展开所有标题',
-        buttonToggler: '折叠/展开代码块',
 
         collapsibleCodeblockMode: {
           name: '使用可折叠代码块',
@@ -53,8 +53,9 @@ export default class extends Plugin<Settings> {
           name: '代码块最大高度',
           desc: '仅在 `limit_height` 模式下生效',
         },
-
         codeblockFoldBtn: '折叠/展开代码块',
+
+        tableFoldBtn: '折叠/展开表格',
       },
     }
   })
@@ -75,9 +76,11 @@ export default class extends Plugin<Settings> {
 
     const sectionToggler = new SectionToggler(this)
     const codeblockToggler = new CodeblockToggler(this.app, this)
+    const tableToggler = new TableToggler(this)
 
     this.addChild(sectionToggler)
     this.addChild(codeblockToggler)
+    this.addChild(tableToggler)
 
     this.registerCommand({
       id: 'fold-all',
@@ -87,6 +90,7 @@ export default class extends Plugin<Settings> {
         sectionToggler.foldAll('', true)
         editor.writingArea.querySelectorAll('pre .fa-caret-down')
           .forEach((el: HTMLElement) => el.click())
+        tableToggler.foldAll()
       },
     })
 
@@ -98,6 +102,7 @@ export default class extends Plugin<Settings> {
         sectionToggler.foldAll('', false)
         editor.writingArea.querySelectorAll('pre .fa-caret-up')
           .forEach((el: HTMLElement) => el.click())
+        tableToggler.unfoldAll()
       },
     })
   }
