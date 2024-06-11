@@ -14,6 +14,8 @@ export class TableToggler extends Component {
 
     this.register(
       decorate.afterCall(editor.tableEdit, 'showTableEdit', ([figure]) => {
+        if (!figure || !figure.jquery) return
+
         const klass = figure.hasClass('typ-folded-table')
           ? 'fa-caret-down'
           : 'fa-caret-up'
