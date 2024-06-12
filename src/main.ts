@@ -26,6 +26,8 @@ export default class CollapsibleSectionPlugin extends Plugin<Settings> {
         unfoldAll: 'Unfold all',
         foldAllHeadings: 'Fold all headings',
         unfoldAllHeadings: 'Unfold all headings',
+        foldAllTables: 'Fold all tables',
+        unfoldAllTables: 'Unfold all tables',
 
         collapsibleCodeblockMode: {
           name: 'Collapsible code block mode',
@@ -44,6 +46,8 @@ export default class CollapsibleSectionPlugin extends Plugin<Settings> {
         unfoldAll: '展开所有',
         foldAllHeadings: '折叠所有标题',
         unfoldAllHeadings: '展开所有标题',
+        foldAllTables: '折叠所有表格',
+        unfoldAllTables: '展开所有表格',
 
         collapsibleCodeblockMode: {
           name: '使用可折叠代码块',

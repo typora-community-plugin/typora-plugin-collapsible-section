@@ -10,7 +10,22 @@ export class TableToggler extends Component {
   }
 
   onload() {
+    const { plugin } = this
     const { t } = this.plugin.i18n
+
+    plugin.registerCommand({
+      id: 'fold-all-table',
+      title: t.foldAllTables,
+      scope: 'editor',
+      callback: () => this.foldAll(),
+    })
+
+    plugin.registerCommand({
+      id: 'unfold-all-table',
+      title: t.unfoldAllTables,
+      scope: 'editor',
+      callback: () => this.unfoldAll(),
+    })
 
     this.register(
       decorate.afterCall(editor.tableEdit, 'showTableEdit', ([figure]) => {
