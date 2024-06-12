@@ -13,8 +13,11 @@
 
 ## 预览
 
-![](./docs/assets/base.jpg)
-![](./docs/assets/codeblock.gif)
+| **折叠标题**                      | **折叠列表**                   |
+| :------------------------------: | :--------------------------: |
+| ![](./docs/assets/headings.gif)  | ![](./docs/assets/list.gif)  |
+| **折叠代码块**                     | **折叠表格**                   |
+| ![](./docs/assets/codeblock.gif) | ![](./docs/assets/table.gif) |
 
 ## 安装
 

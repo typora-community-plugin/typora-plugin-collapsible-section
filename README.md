@@ -13,8 +13,11 @@ Fold/unfold markdown section:
 
 ## Preview
 
-![](./docs/assets/base.jpg)
-![](./docs/assets/codeblock.gif)
+| **Headings**                      | **List**                   |
+| :------------------------------: | :--------------------------: |
+| ![](./docs/assets/headings.gif)  | ![](./docs/assets/list.gif)  |
+| **Codeblock**                     | **Table**                   |
+| ![](./docs/assets/codeblock.gif) | ![](./docs/assets/table.gif) |
 
 ## Install
 
