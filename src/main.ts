@@ -1,6 +1,5 @@
 import './style.scss'
 import { I18n, Plugin, PluginSettings } from '@typora-community-plugin/core'
-import { editor } from 'typora'
 import { SectionToggler } from './features/section'
 import { CodeblockToggler } from './features/codeblock'
 import { CollapsibleSettingTab } from './setting-tab'
@@ -28,6 +27,8 @@ export default class CollapsibleSectionPlugin extends Plugin<Settings> {
         unfoldAllHeadings: 'Unfold all headings',
         foldAllTables: 'Fold all tables',
         unfoldAllTables: 'Unfold all tables',
+        foldAllCodeblocks: 'Fold all codeblocks',
+        unfoldAllCodeblocks: 'Unfold all codeblocks',
 
         collapsibleCodeblockMode: {
           name: 'Collapsible code block mode',
@@ -48,6 +49,8 @@ export default class CollapsibleSectionPlugin extends Plugin<Settings> {
         unfoldAllHeadings: '展开所有标题',
         foldAllTables: '折叠所有表格',
         unfoldAllTables: '展开所有表格',
+        foldAllCodeblocks: '折叠所有代码块',
+        unfoldAllCodeblocks: '展开所有代码块',
 
         collapsibleCodeblockMode: {
           name: '使用可折叠代码块',

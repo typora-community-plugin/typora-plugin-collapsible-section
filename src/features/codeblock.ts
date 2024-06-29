@@ -14,18 +14,34 @@ export class CodeblockToggler extends Component {
   }
 
   onload() {
-    const { settings } = this.plugin
+    const { plugin } = this
+    const { settings } = plugin
+    const { t } = plugin.i18n
+
+    plugin.registerCommand({
+      id: 'fold-all-codeblock',
+      title: t.foldAllCodeblocks,
+      scope: 'editor',
+      callback: () => this.foldAll(),
+    })
+
+    plugin.registerCommand({
+      id: 'unfold-all-codeblock',
+      title: t.unfoldAllCodeblocks,
+      scope: 'editor',
+      callback: () => this.unfoldAll(),
+    })
 
     const mode = settings.get('collapsableCodeblockMode')
     this._setup(mode)
 
-    this.plugin.register(
+    plugin.register(
       settings.onChange('collapsableCodeblockMode', (_, mode) => {
         this.unload()
         this._setup(mode)
       }))
 
-    this.plugin.register(
+    plugin.register(
       settings.onChange('codeblockMaxHeight', (_, height) => {
         this._setLimit(height)
       }))
