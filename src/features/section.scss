@@ -1,0 +1,28 @@
+.md-heading:has(> .typ-collapsible-btn:first-child:last-child)::after {
+  content: '\200B';
+}
+
+.typ-collapsible-btn {
+  position: absolute;
+  left: -16px;
+  border: none;
+  border-radius: 0.25em;
+  color: gray;
+
+  .fa {
+    font-size: 12px;
+    vertical-align: middle;
+  }
+}
+
+// Folded section element, such as heading, list.
+.typ-folded::after {
+  content: "\22EF";
+  padding: .5rem;
+  color: gray;
+}
+
+// Hide elements when folded, such as elements after heading & children of list.
+.typ-hidden {
+  display: none;
+}

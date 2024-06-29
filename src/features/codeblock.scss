@@ -1,0 +1,24 @@
+.md-fences {
+
+  // Mark codeblock as handled by this plugin.
+  &.typ-collapsible-code {}
+
+  &.typ-folded-code {
+    &::before {
+      content: attr(lang);
+      padding: 0 0.5rem;
+      color: rgb(var(--typ-color-gray-2));
+    }
+
+    .CodeMirror-wrap {
+      max-height: 0;
+    }
+  }
+
+  &.typ-limited-code {
+    .CodeMirror-scroll {
+      overflow-y: scroll;
+      max-height: var(--typ-codeblock-max-height);
+    }
+  }
+}

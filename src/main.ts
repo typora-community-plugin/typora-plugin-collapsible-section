@@ -92,8 +92,7 @@ export default class CollapsibleSectionPlugin extends Plugin<Settings> {
       scope: 'editor',
       callback: () => {
         sectionToggler.foldAll('', true)
-        editor.writingArea.querySelectorAll('pre .fa-caret-down')
-          .forEach((el: HTMLElement) => el.click())
+        codeblockToggler.foldAll()
         tableToggler.foldAll()
       },
     })
@@ -104,8 +103,7 @@ export default class CollapsibleSectionPlugin extends Plugin<Settings> {
       scope: 'editor',
       callback: () => {
         sectionToggler.foldAll('', false)
-        editor.writingArea.querySelectorAll('pre .fa-caret-up')
-          .forEach((el: HTMLElement) => el.click())
+        codeblockToggler.unfoldAll()
         tableToggler.unfoldAll()
       },
     })
