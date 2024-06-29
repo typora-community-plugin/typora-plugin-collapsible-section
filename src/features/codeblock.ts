@@ -68,7 +68,10 @@ export class CodeblockToggler extends Component {
             if (el.classList.contains('typ-collapsible-code')) return
 
             this.renderButton(el, this.button)
-            if (!that.folder.isUnfolded(el)) {
+
+            const code = editor.fences.getValue(el.getAttribute('cid')!)
+            const hasCode = code.length
+            if (!that.folder.isUnfolded(el) && hasCode) {
               that.folder.fold(el)
             }
 
