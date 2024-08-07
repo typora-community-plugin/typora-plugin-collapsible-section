@@ -110,17 +110,17 @@ export class CodeblockToggler extends Component {
   onunload() {
     document.body.style.removeProperty(CSS_VAR_MAX_HEIGHT)
 
-    this.folder.unfoldAll()
+    this.folder?.unfoldAll()
 
     $('.typ-collapsible-code').toggleClass('typ-collapsible-code')
   }
 
   foldAll() {
-    this.folder.foldAll()
+    this.folder?.foldAll()
   }
 
   unfoldAll() {
-    this.folder.unfoldAll()
+    this.folder?.unfoldAll()
   }
 }
 
