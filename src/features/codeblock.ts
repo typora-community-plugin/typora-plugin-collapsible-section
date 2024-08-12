@@ -8,9 +8,12 @@ const CSS_VAR_MAX_HEIGHT = '--typ-codeblock-max-height'
 export class CodeblockToggler extends Component {
 
   folder: Folder
+  autoFolder: AutoFolder
 
   constructor(private app: App, private plugin: Plugin) {
     super()
+
+    this.autoFolder = new AutoFolder(this.plugin, this)
   }
 
   onload() {
@@ -85,11 +88,7 @@ export class CodeblockToggler extends Component {
 
             this.renderButton(el, this.button)
 
-            const code = editor.fences.getValue(el.getAttribute('cid')!)
-            const hasCode = code.length
-            if (!that.folder.isUnfolded(el) && hasCode) {
-              that.folder.fold(el)
-            }
+            that.autoFolder.tryFold(el)
 
             el.classList.add('typ-collapsible-code')
           }
@@ -174,5 +173,46 @@ class CodeHider extends Folder {
     this.toggler._toggleButtonIcon(el)
     super.unfold(el)
     $(el).off('click', this._toggleButtonIcon as any)
+  }
+}
+
+class AutoFolder {
+
+  private autoFoldCodeblock: boolean
+  private lineCountLimit: number
+
+  constructor(
+    plugin: Plugin,
+    private toggler: CodeblockToggler
+  ) {
+    const { settings } = plugin
+
+
+    this.autoFoldCodeblock = settings.get('autoFoldCodeblock')
+    this.lineCountLimit = settings.get('lineCountLimit')
+
+    plugin.register(
+      settings.onChange('autoFoldCodeblock', (_, v) => {
+        this.autoFoldCodeblock = v
+      }))
+
+    plugin.register(
+      settings.onChange('lineCountLimit', (_, v) => {
+        this.lineCountLimit = v
+      }))
+  }
+
+  tryFold(el: HTMLElement) {
+    if (!this.autoFoldCodeblock) return
+
+    const needToFold = !this.toggler.folder.isUnfolded(el)
+
+    const cm = editor.fences.getCm(el.getAttribute('cid')!)
+    const lineCount = cm?.lineCount() ?? 0
+    const biggerThanLimit = lineCount >= this.lineCountLimit
+
+    if (needToFold && biggerThanLimit) {
+      this.toggler.folder.fold(el)
+    }
   }
 }

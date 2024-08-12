@@ -2,6 +2,8 @@
   "version": 1,
   "settings": {
     "collapsableCodeblockMode": "fold",
-    "codeblockMaxHeight": "30vh"
+    "codeblockMaxHeight": "30vh",
+    "autoFoldCodeblock": true,
+    "lineCountLimit": 10
   }
 }

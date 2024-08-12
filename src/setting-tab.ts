@@ -59,6 +59,33 @@ export class CollapsibleSettingTab extends SettingTab {
       })
     })
 
+    this.addSetting(setting => {
+      setting.addName(t.autoFoldCodeblock.name)
+      setting.addDescription(t.autoFoldCodeblock.desc)
+      setting.addCheckbox(el => {
+        el.checked = plugin.settings.get('autoFoldCodeblock')
+        el.onclick = () => {
+          plugin.settings.set('autoFoldCodeblock', el.checked)
+        }
+      })
+    })
+
+    this.addSetting(setting => {
+      setting.addName(t.lineCountLimit.name)
+      setting.addDescription(t.lineCountLimit.desc)
+      setting.addInput('number', el => {
+        el.value = plugin.settings.get('lineCountLimit') + ''
+        el.onclick = () => {
+          let count = +el.value
+          if (isNaN(count)) {
+            count = 10
+            el.value = '10'
+          }
+          plugin.settings.set('lineCountLimit', count)
+        }
+      })
+    })
+
     super.show()
   }
 
