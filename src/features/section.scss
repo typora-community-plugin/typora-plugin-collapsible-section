@@ -22,8 +22,19 @@
   color: gray;
 }
 
-blockquote > p.typ-folded {
+blockquote>p.typ-folded {
   margin: auto 0;
+}
+
+// compatibility with callout
+.typ-callout {
+  &>p.typ-folded:first-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .typ-collapsible-btn {
+    background: transparent;
+  }
 }
 
 // Hide elements when folded, such as elements after heading & children of list.
