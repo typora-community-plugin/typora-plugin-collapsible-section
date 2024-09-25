@@ -69,7 +69,7 @@ export class CodeblockToggler extends Component {
     const that = this
 
     this.register(
-      this.app.workspace.activeEditor.postProcessor.register(
+      this.app.features.markdownEditor.postProcessor.register(
         CodeblockPostProcessor.from({
           button: {
             text: '<span class="fa fa-caret-up"></span>',
