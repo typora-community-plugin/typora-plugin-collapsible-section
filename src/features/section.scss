@@ -22,6 +22,10 @@
   color: gray;
 }
 
+blockquote > p.typ-folded {
+  margin: auto 0;
+}
+
 // Hide elements when folded, such as elements after heading & children of list.
 .typ-hidden {
   display: none;

@@ -3,6 +3,11 @@ import type Plugin from "src/main"
 import { editor } from "typora"
 
 
+const SELECTOR_HEADING = '.md-heading:not(:empty)'
+const SELECTOR_LIST = '.md-list-item>:first-child:not(:last-child)'
+const SELECTOR_QUOTEBLOCK = '[mdtype="blockquote"]>p:first-child:not(:last-child)'
+const SELECTOR_CALLOUT = '.md-alert>p:first-child:not(:last-child)'
+
 export class SectionToggler extends Component {
 
   constructor(private plugin: Plugin) {
@@ -16,10 +21,9 @@ export class SectionToggler extends Component {
     plugin.registerMarkdownPostProcessor(
       HtmlPostProcessor.from({
         selector: [
-          // handle: heading
-          '.md-heading:not(:empty)',
-          // handle: list
-          '.md-list-item>:first-child:not(:last-child)'
+          SELECTOR_HEADING,
+          SELECTOR_LIST,
+          SELECTOR_QUOTEBLOCK,
         ].join(','),
         process: makeCollapsible,
       }))
@@ -28,14 +32,42 @@ export class SectionToggler extends Component {
       id: 'fold-all-headings',
       title: t.foldAllHeadings,
       scope: 'editor',
-      callback: () => foldAll('.md-heading', true),
+      callback: () => foldAll(SELECTOR_HEADING, true),
     })
 
     plugin.registerCommand({
       id: 'unfold-all-headings',
       title: t.unfoldAllHeadings,
       scope: 'editor',
-      callback: () => foldAll('.md-heading', false),
+      callback: () => foldAll(SELECTOR_HEADING, false),
+    })
+
+    plugin.registerCommand({
+      id: 'fold-all-quoteblocks',
+      title: t.foldAllQuoteBlocks,
+      scope: 'editor',
+      callback: () => foldAll(SELECTOR_QUOTEBLOCK, true),
+    })
+
+    plugin.registerCommand({
+      id: 'unfold-all-quoteblocks',
+      title: t.unfoldAllQuoteBlocks,
+      scope: 'editor',
+      callback: () => foldAll(SELECTOR_QUOTEBLOCK, false),
+    })
+
+    plugin.registerCommand({
+      id: 'fold-all-callouts',
+      title: t.foldAllCallouts,
+      scope: 'editor',
+      callback: () => foldAll(SELECTOR_CALLOUT, true),
+    })
+
+    plugin.registerCommand({
+      id: 'unfold-all-callouts',
+      title: t.unfoldAllCallouts,
+      scope: 'editor',
+      callback: () => foldAll(SELECTOR_CALLOUT, false),
     })
   }
 
@@ -50,7 +82,9 @@ export class SectionToggler extends Component {
       .forEach(el => el.remove())
   }
 
-  foldAll = foldAll
+  foldAll = (selector?: string) => foldAll(selector, true)
+
+  unfoldAll = (selector?: string) => foldAll(selector, false)
 }
 
 function makeCollapsible(el: HTMLElement) {
@@ -131,7 +165,7 @@ function fold(el: HTMLElement, states: HeadingState[]) {
   el.classList.toggle('typ-hidden', states.some(s => s.isFolded))
 }
 
-function foldAll(typeSelector: string, state: boolean) {
+function foldAll(typeSelector = '', state: boolean) {
   let stateCls = '.typ-folded'
 
   if (state) {

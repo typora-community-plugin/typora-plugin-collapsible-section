@@ -10,14 +10,19 @@ Fold/unfold markdown section:
 - [x] Nested list
 - [x] Codeblock
 - [x] Table
+- [x] Quoteblock
+  - [x] Callout
 
 ## Preview
 
-| **Headings**                      | **List**                   |
-| :------------------------------: | :--------------------------: |
-| ![](./docs/assets/headings.gif)  | ![](./docs/assets/list.gif)  |
-| **Codeblock**                     | **Table**                   |
-| ![](./docs/assets/codeblock.gif) | ![](./docs/assets/table.gif) |
+| **Headings**                      | **List**                       |
+| :-------------------------------: | :----------------------------: |
+| ![](./docs/assets/headings.gif)   | ![](./docs/assets/list.gif)    |
+| **Codeblock**                     | **Table**                      |
+| ![](./docs/assets/codeblock.gif)  | ![](./docs/assets/table.gif)   |
+| **Quoteblock**                    | **Callout**                    |
+| ![](./docs/assets/quoteblock.gif) | ![](./docs/assets/callout.gif) |
+
 
 ## Install
 

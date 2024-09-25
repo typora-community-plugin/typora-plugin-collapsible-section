@@ -10,14 +10,18 @@
 - [x] 嵌套列表折叠
 - [x] 代码块折叠
 - [x] 表格折叠
+- [x] 引用块折叠
+  - [x] 标注块（Callout）折叠
 
 ## 预览
 
-| **折叠标题**                      | **折叠列表**                   |
-| :------------------------------: | :--------------------------: |
-| ![](./docs/assets/headings.gif)  | ![](./docs/assets/list.gif)  |
-| **折叠代码块**                     | **折叠表格**                   |
-| ![](./docs/assets/codeblock.gif) | ![](./docs/assets/table.gif) |
+| **折叠标题**                       | **折叠列表**                     |
+| :-------------------------------: | :----------------------------: |
+| ![](./docs/assets/headings.gif)   | ![](./docs/assets/list.gif)    |
+| **折叠代码块**                      | **折叠表格**                    |
+| ![](./docs/assets/codeblock.gif)  | ![](./docs/assets/table.gif)   |
+| **引用块**                         | **标注块（Callout）**            |
+| ![](./docs/assets/quoteblock.gif) | ![](./docs/assets/callout.gif) |
 
 ## 安装
 

@@ -31,6 +31,10 @@ export default class CollapsibleSectionPlugin extends Plugin<Settings> {
         unfoldAllHeadings: 'Unfold all headings',
         foldAllTables: 'Fold all tables',
         unfoldAllTables: 'Unfold all tables',
+        foldAllQuoteBlocks: 'Fold all quoteblocks',
+        unfoldAllQuoteBlocks: 'Unfold all quoteblocks',
+        foldAllCallouts: 'Fold all callouts',
+        unfoldAllCallouts: 'Unfold all callouts',
         foldAllCodeblocks: 'Fold all codeblocks',
         unfoldAllCodeblocks: 'Unfold all codeblocks',
 
@@ -61,6 +65,10 @@ export default class CollapsibleSectionPlugin extends Plugin<Settings> {
         unfoldAllHeadings: '展开所有标题',
         foldAllTables: '折叠所有表格',
         unfoldAllTables: '展开所有表格',
+        foldAllQuoteBlocks: '折叠所有引用块',
+        unfoldAllQuoteBlocks: '展开所有引用块',
+        foldAllCallouts: '折叠所有标注块',
+        unfoldAllCallouts: '展开所有标注块',
         foldAllCodeblocks: '折叠所有代码块',
         unfoldAllCodeblocks: '展开所有代码块',
 
@@ -114,7 +122,7 @@ export default class CollapsibleSectionPlugin extends Plugin<Settings> {
       title: t.foldAll,
       scope: 'editor',
       callback: () => {
-        sectionToggler.foldAll('', true)
+        sectionToggler.foldAll()
         codeblockToggler.foldAll()
         tableToggler.foldAll()
       },
@@ -125,7 +133,7 @@ export default class CollapsibleSectionPlugin extends Plugin<Settings> {
       title: t.unfoldAll,
       scope: 'editor',
       callback: () => {
-        sectionToggler.foldAll('', false)
+        sectionToggler.unfoldAll()
         codeblockToggler.unfoldAll()
         tableToggler.unfoldAll()
       },
