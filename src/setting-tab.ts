@@ -10,9 +10,11 @@ export class CollapsibleSettingTab extends SettingTab {
 
   constructor(private plugin: Plugin) {
     super()
+
+    this.render()
   }
 
-  show() {
+  render() {
     const { plugin } = this
     const { t } = this.plugin.i18n
 
@@ -85,13 +87,6 @@ export class CollapsibleSettingTab extends SettingTab {
         }
       })
     })
-
-    super.show()
-  }
-
-  hide() {
-    this.containerEl.innerHTML = ''
-    super.hide()
   }
 
 }
