@@ -1,4 +1,4 @@
-import { Component, HtmlPostProcessor } from "@typora-community-plugin/core"
+import { Component, format, HtmlPostProcessor } from "@typora-community-plugin/core"
 import type Plugin from "src/main"
 import { editor } from "typora"
 
@@ -6,6 +6,7 @@ import { editor } from "typora"
 const SELECTOR_HEADING = '.md-heading:not(:empty)'
 const SELECTOR_LIST = '.md-list-item>:first-child:not(:last-child)'
 const SELECTOR_QUOTEBLOCK = '[mdtype="blockquote"]>p:first-child:not(:last-child)'
+const SELECTOR_PLAIN_QUOTEBLOCK = 'blockquote[mdtype="blockquote"]>p:first-child:not(:last-child)'
 const SELECTOR_CALLOUT = '.md-alert>p:first-child:not(:last-child)'
 
 export class SectionToggler extends Component {
@@ -42,6 +43,24 @@ export class SectionToggler extends Component {
       callback: () => foldAll(SELECTOR_HEADING, false),
     })
 
+    Array(6).fill(0).map((_, i) => `h${i + 1}`).forEach((hn, i) => {
+      const level = i + 1
+
+      plugin.registerCommand({
+        id: 'fold-all-heading-' + level,
+        title: format(t.foldAllHeadingN, [level]),
+        scope: 'editor',
+        callback: () => foldAll(hn + SELECTOR_HEADING, true),
+      })
+
+      plugin.registerCommand({
+        id: 'unfold-all-heading-' + level,
+        title: format(t.unfoldAllHeadingN, [level]),
+        scope: 'editor',
+        callback: () => foldAll(hn + SELECTOR_HEADING, false),
+      })
+    })
+
     plugin.registerCommand({
       id: 'fold-all-quoteblocks',
       title: t.foldAllQuoteBlocks,
@@ -54,6 +73,20 @@ export class SectionToggler extends Component {
       title: t.unfoldAllQuoteBlocks,
       scope: 'editor',
       callback: () => foldAll(SELECTOR_QUOTEBLOCK, false),
+    })
+
+    plugin.registerCommand({
+      id: 'fold-all-plain-quoteblocks',
+      title: t.foldAllPlainQuoteBlocks,
+      scope: 'editor',
+      callback: () => foldAll(SELECTOR_PLAIN_QUOTEBLOCK, true),
+    })
+
+    plugin.registerCommand({
+      id: 'unfold-all-plain-quoteblocks',
+      title: t.unfoldAllPlainQuoteBlocks,
+      scope: 'editor',
+      callback: () => foldAll(SELECTOR_PLAIN_QUOTEBLOCK, false),
     })
 
     plugin.registerCommand({

@@ -5,8 +5,8 @@
   "author": "plylrnsdy",
   "authorUrl": "https://github.com/plylrnsdy",
   "repo": "typora-community-plugin/typora-plugin-collapsible-section",
-  "version": "1.8.1",
-  "minAppVersion": "1.5.0",
-  "minCoreVersion": "2.3.16",
+  "version": "1.8.2",
+  "minAppVersion": "1.5.1",
+  "minCoreVersion": "2.3.20",
   "platforms": ["win32", "linux", "darwin"]
 }
