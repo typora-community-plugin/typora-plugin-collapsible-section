@@ -26,7 +26,7 @@ export class SectionToggler extends Component {
           SELECTOR_LIST,
           SELECTOR_QUOTEBLOCK,
         ].join(','),
-        process: makeCollapsible,
+        process: (el, { containerEl }) => makeCollapsible(el, containerEl),
       }))
 
     plugin.registerCommand({
@@ -120,10 +120,10 @@ export class SectionToggler extends Component {
   unfoldAll = (selector?: string) => foldAll(selector, false)
 }
 
-function makeCollapsible(el: HTMLElement) {
+function makeCollapsible(el: HTMLElement, root: HTMLElement) {
   if (el.querySelector('.typ-collapsible-btn')) return
 
-  const button = $(`<button class="typ-collapsible-btn" contenteditable="false" style="left: ${10 - clientOffset(el)}px;"><span class="fa fa-caret-down"></span></button>`)
+  const button = $(`<button class="typ-collapsible-btn" contenteditable="false" style="left: ${10 - clientOffset(el, root)}px;"><span class="fa fa-caret-down"></span></button>`)
     .on('click', toggleIcon)
     .on('click', toggleCollapse)
     .prependTo(el)
@@ -135,10 +135,10 @@ function makeCollapsible(el: HTMLElement) {
   }
 }
 
-function clientOffset(el: HTMLElement) {
+function clientOffset(el: HTMLElement, root: HTMLElement) {
   let result = 0;
   let parent = el;
-  while (parent != editor.writingArea) {
+  while (parent && parent != root) {
     result += parent.offsetLeft;
     parent = parent.offsetParent as HTMLElement;
   }

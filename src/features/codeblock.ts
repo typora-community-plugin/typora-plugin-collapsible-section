@@ -1,4 +1,4 @@
-import { App, CodeblockPostProcessor, Component } from "@typora-community-plugin/core"
+import { app, App, CodeblockPostProcessor, Component } from "@typora-community-plugin/core"
 import { editor } from "typora"
 import type Plugin from "src/main"
 
@@ -183,7 +183,8 @@ class AutoFolder {
 
   constructor(
     plugin: Plugin,
-    private toggler: CodeblockToggler
+    private toggler: CodeblockToggler,
+    private mdRenderer = app.features.markdownRenderer,
   ) {
     const { settings } = plugin
 
@@ -207,7 +208,7 @@ class AutoFolder {
 
     const needToFold = !this.toggler.folder.isUnfolded(el)
 
-    const cm = editor.fences.getCm(el.getAttribute('cid')!)
+    const cm = this.mdRenderer.getCodeMirrorInstance(el.getAttribute('cid')!)
     const lineCount = cm?.lineCount() ?? 0
     const biggerThanLimit = lineCount >= this.lineCountLimit
 
