@@ -26,6 +26,7 @@
         "visible": true,
         "order": 2
       }
-    }
+    },
+    "useWorkspace": true
   }
 }
