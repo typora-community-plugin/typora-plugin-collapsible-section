@@ -208,7 +208,8 @@ class AutoFolder {
 
     const needToFold = !this.toggler.folder.isUnfolded(el)
 
-    const cm = this.mdRenderer.getCodeMirrorInstance(el.getAttribute('cid')!)
+    const cid = el.getAttribute('cid')!
+    const cm = this.mdRenderer.getCodeMirrorInstance(cid) ?? editor.fences.getCm(cid)
     const lineCount = cm?.lineCount() ?? 0
     const biggerThanLimit = lineCount >= this.lineCountLimit
 
