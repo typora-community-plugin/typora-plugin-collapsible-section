@@ -56,7 +56,7 @@ export class CodeblockToggler extends Component {
     this._makeCollapsible()
 
     if (mode === 'fold') {
-      this.folder = new CodeHider(this)
+      this.folder = new CodeHider(this.plugin, this)
     }
     else {
       this.folder = new Folder('typ-limited-code', 'typ-unlimited-code')
@@ -125,7 +125,7 @@ export class CodeblockToggler extends Component {
 
 class Folder {
 
-  constructor(private clsFolded: string, private clsUnfolded: string) { }
+  constructor(protected clsFolded: string, protected clsUnfolded: string) { }
 
   foldAll(): void {
     editor.writingArea.querySelectorAll('pre')
@@ -157,8 +157,21 @@ class Folder {
 }
 
 class CodeHider extends Folder {
-  constructor(private toggler: CodeblockToggler) {
-    super('typ-folded-code', 'typ-unfolded-code')
+
+  constructor(
+    plugin: Plugin,
+    private toggler: CodeblockToggler
+  ) {
+    const { settings } = plugin
+    const foldedCodeStyle = settings.get('foldedCodeblockStyle')
+    super(`typ-folded-code__${foldedCodeStyle}`, 'typ-unfolded-code')
+
+    plugin.register(
+      settings.onChange('foldedCodeblockStyle', (_, v) => {
+        const newClsFolded = `typ-folded-code__${v}`
+        $('.' + this.clsFolded).removeClass(this.clsFolded).addClass(newClsFolded)
+        this.clsFolded = newClsFolded
+      }))
   }
 
   fold(el: HTMLElement): void {
@@ -187,7 +200,6 @@ class AutoFolder {
     private mdRenderer = app.features.markdownRenderer,
   ) {
     const { settings } = plugin
-
 
     this.autoFoldCodeblock = settings.get('autoFoldCodeblock')
     this.lineCountLimit = settings.get('lineCountLimit')

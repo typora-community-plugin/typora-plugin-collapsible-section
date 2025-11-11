@@ -3,7 +3,7 @@
   // Mark codeblock as handled by this plugin.
   &.typ-collapsible-code {}
 
-  &.typ-folded-code {
+  &.typ-folded-code__lang {
     &::before {
       content: attr(lang);
       padding: 0 0.5rem;
@@ -12,6 +12,33 @@
 
     .CodeMirror-wrap {
       max-height: 0;
+    }
+  }
+
+  &.typ-folded-code__first_line {
+    &::before {
+      float: right;
+      content: attr(lang);
+      padding: 0 0.5rem;
+      color: rgb(var(--typ-color-gray-2));
+    }
+
+    .CodeMirror-linenumbers {
+      display: none;
+    }
+    .CodeMirror-sizer {
+      margin-left: 0 !important;
+    }
+    .CodeMirror-gutter-wrapper {
+      display: none;
+    }
+
+    .CodeMirror-wrap {
+      max-height: 1.5rem;
+    }
+    .CodeMirror-line::after {
+      content: "\22EF";
+      padding: 0 0.5rem;
     }
   }
 

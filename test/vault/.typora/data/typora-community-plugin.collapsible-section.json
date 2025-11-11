@@ -4,6 +4,7 @@
     "collapsableCodeblockMode": "fold",
     "codeblockMaxHeight": "30vh",
     "autoFoldCodeblock": true,
-    "lineCountLimit": 10
+    "lineCountLimit": 10,
+    "foldedCodeblockStyle": "first_line"
   }
 }

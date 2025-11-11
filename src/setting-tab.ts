@@ -48,20 +48,6 @@ export class CollapsibleSettingTab extends SettingTab {
     })
 
     this.addSetting(setting => {
-      setting.addName(t.codeblockMaxHeight.name)
-      setting.addDescription(t.codeblockMaxHeight.desc)
-      setting.addText(el => {
-        $(el)
-          .val(plugin.settings.get('codeblockMaxHeight'))
-          .on('change', e => {
-            plugin.settings.set(
-              'codeblockMaxHeight', $(e.target).val() as string
-            )
-          })
-      })
-    })
-
-    this.addSetting(setting => {
       setting.addName(t.autoFoldCodeblock.name)
       setting.addDescription(t.autoFoldCodeblock.desc)
       setting.addCheckbox(el => {
@@ -85,6 +71,52 @@ export class CollapsibleSettingTab extends SettingTab {
           }
           plugin.settings.set('lineCountLimit', count)
         }
+      })
+    })
+
+    this.addSettingTitle('mode: fold')
+
+    this.addSetting(setting => {
+      setting.addName(t.foldedCodeblockStyle.name)
+
+      setting.addDescription(el => {
+        $(el).append(
+          t.foldedCodeblockStyle.desc
+            .split('\n')
+            .join('<br/>')
+        )
+      })
+
+      setting.addSelect(el => {
+        const opts = ['lang', 'first_line']
+
+        const selected = plugin.settings.get('foldedCodeblockStyle')
+        const select = (opt: string) => opt === selected ? 'selected' : ''
+
+        const options = opts.map(name => `<option ${select(name)}>${name}</option>`)
+
+        $(el)
+          .append(...options)
+          .on('change', e => {
+            plugin.settings.set(
+              'foldedCodeblockStyle', $(e.target).val() as any
+            )
+          })
+      })
+    })
+
+    this.addSettingTitle('mode: limit_height')
+    this.addSetting(setting => {
+      setting.addName(t.codeblockMaxHeight.name)
+      setting.addDescription(t.codeblockMaxHeight.desc)
+      setting.addText(el => {
+        $(el)
+          .val(plugin.settings.get('codeblockMaxHeight'))
+          .on('change', e => {
+            plugin.settings.set(
+              'codeblockMaxHeight', $(e.target).val() as string
+            )
+          })
       })
     })
   }
