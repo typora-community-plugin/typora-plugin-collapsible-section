@@ -15,13 +15,15 @@
 
 ## 预览
 
-| **折叠标题**                       | **折叠列表**                     |
-| :-------------------------------: | :----------------------------: |
-| ![](./docs/assets/headings.gif)   | ![](./docs/assets/list.gif)    |
-| **折叠代码块**                      | **折叠表格**                    |
-| ![](./docs/assets/codeblock.gif)  | ![](./docs/assets/table.gif)   |
-| **引用块**                         | **标注块（Callout）**            |
-| ![](./docs/assets/quoteblock.gif) | ![](./docs/assets/callout.gif) |
+| **折叠标题**                         | **折叠列表**                                  |
+| :----------------------------------: | :------------------------------------------: |
+| ![](./docs/assets/headings.gif)      | ![](./docs/assets/list.gif)                  |
+| **折叠代码块 (mode=fold,style=lang)** | **折叠代码块 (mode=fold,style=first_line)**   |
+| ![](./docs/assets/codeblock.gif)     | ![](./docs/assets/codeblock2.gif)            |
+| **折叠代码块 (mode=limit_height)**    | **折叠表格**                                 |
+| ![](./docs/assets/codeblock3.gif)    | ![](./docs/assets/table.gif)                 |
+| **引用块**                            | **标注块（Callout）**                        |
+| ![](./docs/assets/quoteblock.gif)    | ![](./docs/assets/callout.gif)               |
 
 ## 安装
 

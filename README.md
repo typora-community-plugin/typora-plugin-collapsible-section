@@ -15,13 +15,15 @@ Fold/unfold markdown section:
 
 ## Preview
 
-| **Headings**                      | **List**                       |
-| :-------------------------------: | :----------------------------: |
-| ![](./docs/assets/headings.gif)   | ![](./docs/assets/list.gif)    |
-| **Codeblock**                     | **Table**                      |
-| ![](./docs/assets/codeblock.gif)  | ![](./docs/assets/table.gif)   |
-| **Quoteblock**                    | **Callout**                    |
-| ![](./docs/assets/quoteblock.gif) | ![](./docs/assets/callout.gif) |
+| **Headings**                         | **List**                                     |
+| :----------------------------------: | :------------------------------------------: |
+| ![](./docs/assets/headings.gif)      | ![](./docs/assets/list.gif)                  |
+| **Codeblock (mode=fold,style=lang)** | **Codeblock (mode=fold,style=first_line)**   |
+| ![](./docs/assets/codeblock.gif)     | ![](./docs/assets/codeblock2.gif)            |
+| **Codeblock (mode=limit_height)**    | **Table**                                    |
+| ![](./docs/assets/codeblock3.gif)    | ![](./docs/assets/table.gif)                 |
+| **Quoteblock**                       | **Callout**                                  |
+| ![](./docs/assets/quoteblock.gif)    | ![](./docs/assets/callout.gif)               |
 
 
 ## Install
