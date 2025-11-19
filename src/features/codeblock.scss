@@ -32,6 +32,9 @@
     .CodeMirror-gutter-wrapper {
       display: none;
     }
+    .CodeMirror-gutters {
+      border: 0;
+    }
 
     .CodeMirror-wrap {
       max-height: 1.5rem;
