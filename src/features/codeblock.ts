@@ -218,11 +218,11 @@ class AutoFolder {
   tryFold(el: HTMLElement) {
     if (!this.autoFoldCodeblock) return
 
-    const needToFold = !this.toggler.folder.isUnfolded(el)
-
     const cid = el.getAttribute('cid')!
     const cm = this.mdRenderer.getCodeMirrorInstance(cid) ?? editor.fences.getCm(cid)
     const lineCount = cm?.lineCount() ?? 0
+    const isEmpty = lineCount < 2 && !!cm?.getLine(0)
+    const needToFold = !this.toggler.folder.isUnfolded(el) && !isEmpty
     const biggerThanLimit = lineCount >= this.lineCountLimit
 
     if (needToFold && biggerThanLimit) {
