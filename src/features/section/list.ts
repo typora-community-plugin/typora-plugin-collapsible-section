@@ -3,6 +3,7 @@ import type Plugin from "src/main"
 import {
   SELECTORS, createCollapsibleButton, toggleCaretIcon, toggleSimpleCollapse, foldAll, cleanupCollapsible,
 } from "./shared"
+import { matchesGlob } from "src/utils"
 
 
 export class ListToggler extends Component {
@@ -26,7 +27,11 @@ export class ListToggler extends Component {
       app.features.markdownEditor.postProcessor.register(
         HtmlPostProcessor.from({
           selector: SELECTORS.list,
-          process: (el, { containerEl }) => this._makeCollapsible(el, containerEl),
+          process: (el, { containerEl }) => {
+            const filePath = app.workspace.activeFile
+            if (!matchesGlob(filePath, this.plugin.settings.get('globList'))) return
+            this._makeCollapsible(el, containerEl)
+          },
         })))
   }
 

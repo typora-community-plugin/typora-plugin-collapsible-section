@@ -40,6 +40,7 @@ export const i18nResources = {
       name: 'Enable table folding',
       desc: 'Allow tables to be folded/unfolded via the toggle button in the table edit toolbar.',
     },
+    globDesc: 'Glob expressions (e.g., `docs/**/*.md`) to limit which files enable this feature. Supported syntax: `*` (any chars except `/`), `**` (any path), `?` (one char), `[abc]` (char class), `{a,b}` (alternation). Leave empty for all files.',
     autoFoldCodeblock: {
       name: 'Fold code block automatically',
       desc: 'Fold code block which line count is more than the limit. Only works when mode `fold` or `limit_height` is enabled.',
@@ -99,6 +100,7 @@ export const i18nResources = {
       name: '启表格折叠',
       desc: '允许通过表编辑工具栏中的切换按钮折叠/展开表格。',
     },
+    globDesc: 'Glob 表达式（例如 `docs/**/*.md`）限制启用此功能的文件。支持语法：`*`（匹配 `/` 外的任意字符）、`**`（匹配任意路径）、`?`（单个字符）、`[abc]`（字符集）、`{a,b}`（多选一）。留空表示所有文件。',
     autoFoldCodeblock: {
       name: '自动折叠代码块',
       desc: '当代码块行数超过限制时折叠代码块。仅在 `fold` 或 `limit_height` 模式下生效',

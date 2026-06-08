@@ -18,7 +18,10 @@ export class CollapsibleSettingTab extends SettingTab {
     const { plugin } = this
     const { t } = this.plugin.i18n
 
-    this.addSettingTitle('Features')
+    this.addSetting(setting => {
+      setting.addTitle('Features')
+      setting.addDescription(t.globDesc)
+    })
 
     this.addSetting(setting => {
       setting.addName(t.collapsableH1)
@@ -26,6 +29,13 @@ export class CollapsibleSettingTab extends SettingTab {
         el.checked = plugin.settings.get('collapsableH1')
         el.onclick = () => {
           plugin.settings.set('collapsableH1', el.checked)
+        }
+      })
+      setting.addInput('text', el => {
+        el.value = plugin.settings.get('globH1')
+        el.placeholder = 'glob'
+        el.oninput = () => {
+          plugin.settings.set('globH1', el.value)
         }
       })
     })
@@ -38,6 +48,13 @@ export class CollapsibleSettingTab extends SettingTab {
           plugin.settings.set('collapsableH2', el.checked)
         }
       })
+      setting.addInput('text', el => {
+        el.value = plugin.settings.get('globH2')
+        el.placeholder = 'glob'
+        el.oninput = () => {
+          plugin.settings.set('globH2', el.value)
+        }
+      })
     })
 
     this.addSetting(setting => {
@@ -46,6 +63,13 @@ export class CollapsibleSettingTab extends SettingTab {
         el.checked = plugin.settings.get('collapsableH3')
         el.onclick = () => {
           plugin.settings.set('collapsableH3', el.checked)
+        }
+      })
+      setting.addInput('text', el => {
+        el.value = plugin.settings.get('globH3')
+        el.placeholder = 'glob'
+        el.oninput = () => {
+          plugin.settings.set('globH3', el.value)
         }
       })
     })
@@ -58,6 +82,13 @@ export class CollapsibleSettingTab extends SettingTab {
           plugin.settings.set('collapsableH4', el.checked)
         }
       })
+      setting.addInput('text', el => {
+        el.value = plugin.settings.get('globH4')
+        el.placeholder = 'glob'
+        el.oninput = () => {
+          plugin.settings.set('globH4', el.value)
+        }
+      })
     })
 
     this.addSetting(setting => {
@@ -66,6 +97,13 @@ export class CollapsibleSettingTab extends SettingTab {
         el.checked = plugin.settings.get('collapsableH5')
         el.onclick = () => {
           plugin.settings.set('collapsableH5', el.checked)
+        }
+      })
+      setting.addInput('text', el => {
+        el.value = plugin.settings.get('globH5')
+        el.placeholder = 'glob'
+        el.oninput = () => {
+          plugin.settings.set('globH5', el.value)
         }
       })
     })
@@ -78,6 +116,13 @@ export class CollapsibleSettingTab extends SettingTab {
           plugin.settings.set('collapsableH6', el.checked)
         }
       })
+      setting.addInput('text', el => {
+        el.value = plugin.settings.get('globH6')
+        el.placeholder = 'glob'
+        el.oninput = () => {
+          plugin.settings.set('globH6', el.value)
+        }
+      })
     })
 
     this.addSetting(setting => {
@@ -86,6 +131,13 @@ export class CollapsibleSettingTab extends SettingTab {
         el.checked = plugin.settings.get('collapsableList')
         el.onclick = () => {
           plugin.settings.set('collapsableList', el.checked)
+        }
+      })
+      setting.addInput('text', el => {
+        el.value = plugin.settings.get('globList')
+        el.placeholder = 'glob'
+        el.oninput = () => {
+          plugin.settings.set('globList', el.value)
         }
       })
     })
@@ -98,6 +150,13 @@ export class CollapsibleSettingTab extends SettingTab {
           plugin.settings.set('collapsablePlainQuoteblock', el.checked)
         }
       })
+      setting.addInput('text', el => {
+        el.value = plugin.settings.get('globPlainQuoteblock')
+        el.placeholder = 'glob'
+        el.oninput = () => {
+          plugin.settings.set('globPlainQuoteblock', el.value)
+        }
+      })
     })
 
     this.addSetting(setting => {
@@ -106,6 +165,13 @@ export class CollapsibleSettingTab extends SettingTab {
         el.checked = plugin.settings.get('collapsableCallout')
         el.onclick = () => {
           plugin.settings.set('collapsableCallout', el.checked)
+        }
+      })
+      setting.addInput('text', el => {
+        el.value = plugin.settings.get('globCallout')
+        el.placeholder = 'glob'
+        el.oninput = () => {
+          plugin.settings.set('globCallout', el.value)
         }
       })
     })
@@ -119,6 +185,13 @@ export class CollapsibleSettingTab extends SettingTab {
           plugin.settings.set('collapsableCodeblock', el.checked)
         }
       })
+      setting.addInput('text', el => {
+        el.value = plugin.settings.get('globCodeblock')
+        el.placeholder = 'glob'
+        el.oninput = () => {
+          plugin.settings.set('globCodeblock', el.value)
+        }
+      })
     })
 
     this.addSetting(setting => {
@@ -128,6 +201,13 @@ export class CollapsibleSettingTab extends SettingTab {
         el.checked = plugin.settings.get('collapsableTable')
         el.onclick = () => {
           plugin.settings.set('collapsableTable', el.checked)
+        }
+      })
+      setting.addInput('text', el => {
+        el.value = plugin.settings.get('globTable')
+        el.placeholder = 'glob'
+        el.oninput = () => {
+          plugin.settings.set('globTable', el.value)
         }
       })
     })

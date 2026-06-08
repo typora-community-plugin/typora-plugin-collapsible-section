@@ -1,6 +1,7 @@
 import { app, App, CodeblockPostProcessor, Component } from "@typora-community-plugin/core"
 import { editor } from "typora"
 import type Plugin from "src/main"
+import { matchesGlob } from "src/utils"
 
 
 const CSS_VAR_MAX_HEIGHT = '--typ-codeblock-max-height'
@@ -96,6 +97,9 @@ export class CodeblockToggler extends Component {
           },
           process: function (this: CodeblockPostProcessor, el) {
             if (el.classList.contains('typ-collapsible-code')) return
+
+            const filePath = app.workspace.activeFile
+            if (!matchesGlob(filePath, that.plugin.settings.get('globCodeblock'))) return
 
             this.renderButton(el, this.button!)
 

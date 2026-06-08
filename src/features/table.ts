@@ -1,6 +1,7 @@
 import { editor } from "typora"
-import { Component, decorate } from "@typora-community-plugin/core"
+import { app, Component, decorate } from "@typora-community-plugin/core"
 import type CollapsibleSectionPlugin from "src/main"
+import { matchesGlob } from "src/utils"
 
 
 export class TableToggler extends Component {
@@ -41,6 +42,9 @@ export class TableToggler extends Component {
     this.register(
       decorate.afterCall(editor.tableEdit, 'showTableEdit', ([figure]) => {
         if (!figure || !figure.jquery) return
+
+        const filePath = app.workspace.activeFile
+        if (!matchesGlob(filePath, this.plugin.settings.get('globTable'))) return
 
         const klass = figure.hasClass('typ-folded-table')
           ? 'fa-caret-down'

@@ -1,6 +1,7 @@
 import { app, Component, HtmlPostProcessor } from "@typora-community-plugin/core"
 import type Plugin from "src/main"
 import { SELECTORS, createCollapsibleButton, toggleCaretIcon, toggleSimpleCollapse, foldAll, cleanupCollapsible } from "../shared"
+import { matchesGlob } from "src/utils"
 
 
 export class PlainQuoteblockToggler extends Component {
@@ -40,7 +41,11 @@ export class PlainQuoteblockToggler extends Component {
       app.features.markdownEditor.postProcessor.register(
         HtmlPostProcessor.from({
           selector: SELECTORS.plainQuoteblock,
-          process: (el, { containerEl }) => this._makeCollapsible(el, containerEl),
+          process: (el, { containerEl }) => {
+            const filePath = app.workspace.activeFile
+            if (!matchesGlob(filePath, this.plugin.settings.get('globPlainQuoteblock'))) return
+            this._makeCollapsible(el, containerEl)
+          },
         })))
   }
 

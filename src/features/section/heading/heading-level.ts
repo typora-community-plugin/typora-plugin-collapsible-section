@@ -4,9 +4,12 @@ import {
   createCollapsibleButton, toggleCaretIcon, foldAll, cleanupCollapsible,
 } from "../shared"
 import { toggleHeadingCollapse } from "./shared"
+import { matchesGlob } from "src/utils"
 
 
 type HeadingSettingKey = `collapsableH${1 | 2 | 3 | 4 | 5 | 6}`
+
+type HeadingGlobKey = `globH${1 | 2 | 3 | 4 | 5 | 6}`
 
 
 export class HeadingLevelToggler extends Component {
@@ -14,6 +17,7 @@ export class HeadingLevelToggler extends Component {
   readonly level: number
   readonly selector: string
   private readonly settingKey: HeadingSettingKey
+  private readonly globKey: HeadingGlobKey
 
   constructor(private plugin: Plugin, level: number) {
     super()
@@ -21,6 +25,7 @@ export class HeadingLevelToggler extends Component {
     this.level = level
     this.selector = `h${level}.md-heading:not(:empty)`
     this.settingKey = `collapsableH${level}` as HeadingSettingKey
+    this.globKey = `globH${level}` as HeadingGlobKey
 
     const { t } = plugin.i18n
 
@@ -54,7 +59,11 @@ export class HeadingLevelToggler extends Component {
       app.features.markdownEditor.postProcessor.register(
         HtmlPostProcessor.from({
           selector: this.selector,
-          process: (el, { containerEl }) => this._makeCollapsible(el, containerEl),
+          process: (el, { containerEl }) => {
+            const filePath = app.workspace.activeFile
+            if (!matchesGlob(filePath, this.plugin.settings.get(this.globKey))) return
+            this._makeCollapsible(el, containerEl)
+          },
         })))
   }
 
