@@ -18,6 +18,122 @@ export class CollapsibleSettingTab extends SettingTab {
     const { plugin } = this
     const { t } = this.plugin.i18n
 
+    this.addSettingTitle('Features')
+
+    this.addSetting(setting => {
+      setting.addName(t.collapsableH1)
+      setting.addCheckbox(el => {
+        el.checked = plugin.settings.get('collapsableH1')
+        el.onclick = () => {
+          plugin.settings.set('collapsableH1', el.checked)
+        }
+      })
+    })
+
+    this.addSetting(setting => {
+      setting.addName(t.collapsableH2)
+      setting.addCheckbox(el => {
+        el.checked = plugin.settings.get('collapsableH2')
+        el.onclick = () => {
+          plugin.settings.set('collapsableH2', el.checked)
+        }
+      })
+    })
+
+    this.addSetting(setting => {
+      setting.addName(t.collapsableH3)
+      setting.addCheckbox(el => {
+        el.checked = plugin.settings.get('collapsableH3')
+        el.onclick = () => {
+          plugin.settings.set('collapsableH3', el.checked)
+        }
+      })
+    })
+
+    this.addSetting(setting => {
+      setting.addName(t.collapsableH4)
+      setting.addCheckbox(el => {
+        el.checked = plugin.settings.get('collapsableH4')
+        el.onclick = () => {
+          plugin.settings.set('collapsableH4', el.checked)
+        }
+      })
+    })
+
+    this.addSetting(setting => {
+      setting.addName(t.collapsableH5)
+      setting.addCheckbox(el => {
+        el.checked = plugin.settings.get('collapsableH5')
+        el.onclick = () => {
+          plugin.settings.set('collapsableH5', el.checked)
+        }
+      })
+    })
+
+    this.addSetting(setting => {
+      setting.addName(t.collapsableH6)
+      setting.addCheckbox(el => {
+        el.checked = plugin.settings.get('collapsableH6')
+        el.onclick = () => {
+          plugin.settings.set('collapsableH6', el.checked)
+        }
+      })
+    })
+
+    this.addSetting(setting => {
+      setting.addName(t.collapsableList)
+      setting.addCheckbox(el => {
+        el.checked = plugin.settings.get('collapsableList')
+        el.onclick = () => {
+          plugin.settings.set('collapsableList', el.checked)
+        }
+      })
+    })
+
+    this.addSetting(setting => {
+      setting.addName(t.collapsablePlainQuoteblock)
+      setting.addCheckbox(el => {
+        el.checked = plugin.settings.get('collapsablePlainQuoteblock')
+        el.onclick = () => {
+          plugin.settings.set('collapsablePlainQuoteblock', el.checked)
+        }
+      })
+    })
+
+    this.addSetting(setting => {
+      setting.addName(t.collapsableCallout)
+      setting.addCheckbox(el => {
+        el.checked = plugin.settings.get('collapsableCallout')
+        el.onclick = () => {
+          plugin.settings.set('collapsableCallout', el.checked)
+        }
+      })
+    })
+
+    this.addSetting(setting => {
+      setting.addName(t.collapsableCodeblock.name)
+      setting.addDescription(t.collapsableCodeblock.desc)
+      setting.addCheckbox(el => {
+        el.checked = plugin.settings.get('collapsableCodeblock')
+        el.onclick = () => {
+          plugin.settings.set('collapsableCodeblock', el.checked)
+        }
+      })
+    })
+
+    this.addSetting(setting => {
+      setting.addName(t.collapsableTable.name)
+      setting.addDescription(t.collapsableTable.desc)
+      setting.addCheckbox(el => {
+        el.checked = plugin.settings.get('collapsableTable')
+        el.onclick = () => {
+          plugin.settings.set('collapsableTable', el.checked)
+        }
+      })
+    })
+
+    this.addSettingTitle('Codeblock')
+
     this.addSetting(setting => {
       setting.addName(t.collapsibleCodeblockMode.name)
 
@@ -74,7 +190,7 @@ export class CollapsibleSettingTab extends SettingTab {
       })
     })
 
-    this.addSettingTitle('mode: fold')
+    this.addSettingTitle('Codeblock mode: fold')
 
     this.addSetting(setting => {
       setting.addName(t.foldedCodeblockStyle.name)
@@ -105,7 +221,7 @@ export class CollapsibleSettingTab extends SettingTab {
       })
     })
 
-    this.addSettingTitle('mode: limit_height')
+    this.addSettingTitle('Codeblock mode: limit_height')
     this.addSetting(setting => {
       setting.addName(t.codeblockMaxHeight.name)
       setting.addDescription(t.codeblockMaxHeight.desc)

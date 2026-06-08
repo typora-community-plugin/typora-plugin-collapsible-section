@@ -7,11 +7,8 @@ export class TableToggler extends Component {
 
   constructor(private plugin: CollapsibleSectionPlugin) {
     super()
-  }
 
-  onload() {
-    const { plugin } = this
-    const { t } = this.plugin.i18n
+    const { t } = plugin.i18n
 
     plugin.registerCommand({
       id: 'fold-all-table',
@@ -26,6 +23,20 @@ export class TableToggler extends Component {
       scope: 'editor',
       callback: () => this.unfoldAll(),
     })
+
+    this.plugin.register(
+      this.plugin.settings.onChange('collapsableTable', (_, isEnabled) => {
+        isEnabled ? this.load() : this.unload()
+      }))
+  }
+
+  load() {
+    if (!this.plugin.settings.get('collapsableTable')) return
+    super.load()
+  }
+
+  onload() {
+    const { t } = this.plugin.i18n
 
     this.register(
       decorate.afterCall(editor.tableEdit, 'showTableEdit', ([figure]) => {

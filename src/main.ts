@@ -1,12 +1,30 @@
 import './style.scss'
-import { I18n, Plugin, PluginSettings } from '@typora-community-plugin/core'
-import { SectionToggler } from './features/section'
-import { CodeblockToggler } from './features/codeblock'
+import { Plugin, PluginSettings } from '@typora-community-plugin/core'
+import { createI18n } from './i18n'
 import { CollapsibleSettingTab } from './setting-tab'
+import {
+  HeadingLevelToggler,
+  ListToggler,
+  QuoteblockToggler,
+  PlainQuoteblockToggler,
+  CalloutToggler,
+} from './features/section'
+import { CodeblockToggler } from './features/codeblock'
 import { TableToggler } from './features/table'
 
 
 interface Settings {
+  collapsableH1: boolean,
+  collapsableH2: boolean,
+  collapsableH3: boolean,
+  collapsableH4: boolean,
+  collapsableH5: boolean,
+  collapsableH6: boolean,
+  collapsableList: boolean,
+  collapsablePlainQuoteblock: boolean,
+  collapsableCallout: boolean,
+  collapsableCodeblock: boolean,
+  collapsableTable: boolean,
   collapsableCodeblockMode: 'none' | 'fold' | 'limit_height',
   autoFoldCodeblock: boolean,
   lineCountLimit: number,
@@ -15,6 +33,17 @@ interface Settings {
 }
 
 const DEFAULT_SETTINGS: Settings = {
+  collapsableH1: true,
+  collapsableH2: true,
+  collapsableH3: true,
+  collapsableH4: true,
+  collapsableH5: true,
+  collapsableH6: true,
+  collapsableList: true,
+  collapsablePlainQuoteblock: true,
+  collapsableCallout: true,
+  collapsableCodeblock: true,
+  collapsableTable: true,
   collapsableCodeblockMode: 'none',
   autoFoldCodeblock: false,
   lineCountLimit: 10,
@@ -24,94 +53,7 @@ const DEFAULT_SETTINGS: Settings = {
 
 export default class CollapsibleSectionPlugin extends Plugin<Settings> {
 
-  i18n = new I18n({
-    resources: {
-      'en': {
-        foldAll: 'Fold all',
-        unfoldAll: 'Unfold all',
-        foldAllHeadings: 'Fold all headings',
-        unfoldAllHeadings: 'Unfold all headings',
-        foldAllHeadingN: 'Fold all H{0}',
-        unfoldAllHeadingN: 'Unfold all H{0}',
-        foldAllTables: 'Fold all tables',
-        unfoldAllTables: 'Unfold all tables',
-        foldAllQuoteBlocks: 'Fold all quoteblocks & callouts',
-        unfoldAllQuoteBlocks: 'Unfold all quoteblocks & callouts',
-        foldAllPlainQuoteBlocks: 'Fold all quoteblocks',
-        unfoldAllPlainQuoteBlocks: 'Unfold all quoteblocks',
-        foldAllCallouts: 'Fold all callouts',
-        unfoldAllCallouts: 'Unfold all callouts',
-        foldAllCodeblocks: 'Fold all codeblocks',
-        unfoldAllCodeblocks: 'Unfold all codeblocks',
-
-        collapsibleCodeblockMode: {
-          name: 'Collapsible code block mode',
-          desc: '- none: disable collapsible code block\n - fold: code blocks will be folded in one line\n - limit_height: code blocks will be limited to a certain height',
-        },
-        autoFoldCodeblock: {
-          name: 'Fold code block automatically',
-          desc: 'Fold code block which line count is more than the limit. Only works when mode `fold` or `limit_height` is enabled.',
-        },
-        lineCountLimit: {
-          name: 'Line count limit for auto fold',
-          desc: 'The minimum line count of code block which can be folded automatically.',
-        },
-        foldedCodeblockStyle: {
-          name: 'Folded codeblock style',
-          desc: 'Only works when mode `fold` is enabled',
-        },
-        codeblockMaxHeight: {
-          name: 'Code block max height',
-          desc: 'Only works when mode `limit_height` is enabled',
-        },
-        codeblockFoldBtn: 'Fold/Unfold code block',
-
-        tableFoldBtn: 'Toggle table',
-      },
-      'zh-cn': {
-        foldAll: '折叠所有',
-        unfoldAll: '展开所有',
-        foldAllHeadings: '折叠所有标题',
-        unfoldAllHeadings: '展开所有标题',
-        foldAllHeadingN: '折叠所有 H{0} 标题',
-        unfoldAllHeadingN: '展开所有 H{0} 标题',
-        foldAllTables: '折叠所有表格',
-        unfoldAllTables: '展开所有表格',
-        foldAllQuoteBlocks: '折叠所有引用块和标注块',
-        unfoldAllQuoteBlocks: '展开所有引用块和标注块',
-        foldAllPlainQuoteBlocks: '折叠所有引用块',
-        unfoldAllPlainQuoteBlocks: '展开所有引用块',
-        foldAllCallouts: '折叠所有标注块',
-        unfoldAllCallouts: '展开所有标注块',
-        foldAllCodeblocks: '折叠所有代码块',
-        unfoldAllCodeblocks: '展开所有代码块',
-
-        collapsibleCodeblockMode: {
-          name: '代码块折叠模式',
-          desc: '- none: 禁用代码块折叠\n - fold: 折叠代码块到 1 行\n - limit_height: 限制代码块最大高度',
-        },
-        autoFoldCodeblock: {
-          name: '自动折叠代码块',
-          desc: '当代码块行数超过限制时折叠代码块。仅在 `fold` 或 `limit_height` 模式下生效',
-        },
-        lineCountLimit: {
-          name: '自动折叠行数限制',
-          desc: '代码块行数大于或等于该限制时自动折叠',
-        },
-        foldedCodeblockStyle: {
-          name: '折叠代码块样式',
-          desc: '仅在 `fold` 模式下生效',
-        },
-        codeblockMaxHeight: {
-          name: '代码块最大高度',
-          desc: '仅在 `limit_height` 模式下生效',
-        },
-        codeblockFoldBtn: '折叠/展开代码块',
-
-        tableFoldBtn: '折叠/展开表格',
-      },
-    }
-  })
+  i18n = createI18n()
 
   onload() {
     const { t } = this.i18n
@@ -127,20 +69,40 @@ export default class CollapsibleSectionPlugin extends Plugin<Settings> {
     this.registerSettingTab(new CollapsibleSettingTab(this))
 
 
-    const sectionToggler = new SectionToggler(this)
+    const headingLevelTogglers = [1, 2, 3, 4, 5, 6].map(level => {
+      const toggler = new HeadingLevelToggler(this, level)
+      this.addChild(toggler)
+      return toggler
+    })
+
+    const listToggler = new ListToggler(this)
+    const quoteblockToggler = new QuoteblockToggler(this)
+    const plainQuoteblockToggler = new PlainQuoteblockToggler(this)
+    const calloutToggler = new CalloutToggler(this)
+
+    this.addChild(listToggler)
+    this.addChild(quoteblockToggler)
+    this.addChild(plainQuoteblockToggler)
+    this.addChild(calloutToggler)
+
     const codeblockToggler = new CodeblockToggler(this.app, this)
     const tableToggler = new TableToggler(this)
 
-    this.addChild(sectionToggler)
     this.addChild(codeblockToggler)
     this.addChild(tableToggler)
+
+    // --- Global fold/unfold commands ---
 
     this.registerCommand({
       id: 'fold-all',
       title: t.foldAll,
       scope: 'editor',
       callback: () => {
-        sectionToggler.foldAll()
+        headingLevelTogglers.forEach(t => t.foldAll())
+        listToggler.foldAll()
+        quoteblockToggler.foldAll()
+        plainQuoteblockToggler.foldAll()
+        calloutToggler.foldAll()
         codeblockToggler.foldAll()
         tableToggler.foldAll()
       },
@@ -151,10 +113,28 @@ export default class CollapsibleSectionPlugin extends Plugin<Settings> {
       title: t.unfoldAll,
       scope: 'editor',
       callback: () => {
-        sectionToggler.unfoldAll()
+        headingLevelTogglers.forEach(t => t.unfoldAll())
+        listToggler.unfoldAll()
+        quoteblockToggler.unfoldAll()
+        plainQuoteblockToggler.unfoldAll()
+        calloutToggler.unfoldAll()
         codeblockToggler.unfoldAll()
         tableToggler.unfoldAll()
       },
+    })
+
+    this.registerCommand({
+      id: 'fold-all-headings',
+      title: t.foldAllHeadings,
+      scope: 'editor',
+      callback: () => headingLevelTogglers.forEach(t => t.foldAll()),
+    })
+
+    this.registerCommand({
+      id: 'unfold-all-headings',
+      title: t.unfoldAllHeadings,
+      scope: 'editor',
+      callback: () => headingLevelTogglers.forEach(t => t.unfoldAll()),
     })
   }
 }

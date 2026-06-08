@@ -7,18 +7,14 @@ const CSS_VAR_MAX_HEIGHT = '--typ-codeblock-max-height'
 
 export class CodeblockToggler extends Component {
 
-  folder: Folder
+  folder!: Folder
   autoFolder: AutoFolder
 
   constructor(private app: App, private plugin: Plugin) {
     super()
 
     this.autoFolder = new AutoFolder(this.plugin, this)
-  }
 
-  onload() {
-    const { plugin } = this
-    const { settings } = plugin
     const { t } = plugin.i18n
 
     plugin.registerCommand({
@@ -34,6 +30,21 @@ export class CodeblockToggler extends Component {
       scope: 'editor',
       callback: () => this.unfoldAll(),
     })
+
+    plugin.register(
+      plugin.settings.onChange('collapsableCodeblock', (_, isEnabled) => {
+        isEnabled ? this.load() : this.unload()
+      }))
+  }
+
+  load() {
+    if (!this.plugin.settings.get('collapsableCodeblock')) return
+    super.load()
+  }
+
+  onload() {
+    const { plugin } = this
+    const { settings } = plugin
 
     const mode = settings.get('collapsableCodeblockMode')
     this._setup(mode)
@@ -83,10 +94,10 @@ export class CodeblockToggler extends Component {
                 that.folder.fold(codeblock)
             },
           },
-          process(el) {
+          process: function (this: CodeblockPostProcessor, el) {
             if (el.classList.contains('typ-collapsible-code')) return
 
-            this.renderButton(el, this.button)
+            this.renderButton(el, this.button!)
 
             that.autoFolder.tryFold(el)
 
