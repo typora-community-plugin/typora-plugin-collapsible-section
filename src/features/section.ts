@@ -9,6 +9,8 @@ const SELECTOR_QUOTEBLOCK = '[mdtype="blockquote"]>p:first-child:not(:last-child
 const SELECTOR_PLAIN_QUOTEBLOCK = 'blockquote[mdtype="blockquote"]>p:first-child:not(:last-child)'
 const SELECTOR_CALLOUT = '.md-alert>p:first-child:not(:last-child)'
 
+type HeadingState = { level: number, isFolded: boolean }
+
 export class SectionToggler extends Component {
 
   constructor(private plugin: Plugin) {
@@ -26,21 +28,21 @@ export class SectionToggler extends Component {
           SELECTOR_LIST,
           SELECTOR_QUOTEBLOCK,
         ].join(','),
-        process: (el, { containerEl }) => makeCollapsible(el, containerEl),
+        process: (el, { containerEl }) => this._makeCollapsible(el, containerEl),
       }))
 
     plugin.registerCommand({
       id: 'fold-all-headings',
       title: t.foldAllHeadings,
       scope: 'editor',
-      callback: () => foldAll(SELECTOR_HEADING, true),
+      callback: () => this._foldAll(SELECTOR_HEADING, true),
     })
 
     plugin.registerCommand({
       id: 'unfold-all-headings',
       title: t.unfoldAllHeadings,
       scope: 'editor',
-      callback: () => foldAll(SELECTOR_HEADING, false),
+      callback: () => this._foldAll(SELECTOR_HEADING, false),
     })
 
     Array(6).fill(0).map((_, i) => `h${i + 1}`).forEach((hn, i) => {
@@ -50,14 +52,14 @@ export class SectionToggler extends Component {
         id: 'fold-all-heading-' + level,
         title: format(t.foldAllHeadingN, [level]),
         scope: 'editor',
-        callback: () => foldAll(hn + SELECTOR_HEADING, true),
+        callback: () => this._foldAll(hn + SELECTOR_HEADING, true),
       })
 
       plugin.registerCommand({
         id: 'unfold-all-heading-' + level,
         title: format(t.unfoldAllHeadingN, [level]),
         scope: 'editor',
-        callback: () => foldAll(hn + SELECTOR_HEADING, false),
+        callback: () => this._foldAll(hn + SELECTOR_HEADING, false),
       })
     })
 
@@ -65,42 +67,42 @@ export class SectionToggler extends Component {
       id: 'fold-all-quoteblocks',
       title: t.foldAllQuoteBlocks,
       scope: 'editor',
-      callback: () => foldAll(SELECTOR_QUOTEBLOCK, true),
+      callback: () => this._foldAll(SELECTOR_QUOTEBLOCK, true),
     })
 
     plugin.registerCommand({
       id: 'unfold-all-quoteblocks',
       title: t.unfoldAllQuoteBlocks,
       scope: 'editor',
-      callback: () => foldAll(SELECTOR_QUOTEBLOCK, false),
+      callback: () => this._foldAll(SELECTOR_QUOTEBLOCK, false),
     })
 
     plugin.registerCommand({
       id: 'fold-all-plain-quoteblocks',
       title: t.foldAllPlainQuoteBlocks,
       scope: 'editor',
-      callback: () => foldAll(SELECTOR_PLAIN_QUOTEBLOCK, true),
+      callback: () => this._foldAll(SELECTOR_PLAIN_QUOTEBLOCK, true),
     })
 
     plugin.registerCommand({
       id: 'unfold-all-plain-quoteblocks',
       title: t.unfoldAllPlainQuoteBlocks,
       scope: 'editor',
-      callback: () => foldAll(SELECTOR_PLAIN_QUOTEBLOCK, false),
+      callback: () => this._foldAll(SELECTOR_PLAIN_QUOTEBLOCK, false),
     })
 
     plugin.registerCommand({
       id: 'fold-all-callouts',
       title: t.foldAllCallouts,
       scope: 'editor',
-      callback: () => foldAll(SELECTOR_CALLOUT, true),
+      callback: () => this._foldAll(SELECTOR_CALLOUT, true),
     })
 
     plugin.registerCommand({
       id: 'unfold-all-callouts',
       title: t.unfoldAllCallouts,
       scope: 'editor',
-      callback: () => foldAll(SELECTOR_CALLOUT, false),
+      callback: () => this._foldAll(SELECTOR_CALLOUT, false),
     })
   }
 
@@ -115,97 +117,96 @@ export class SectionToggler extends Component {
       .forEach(el => el.remove())
   }
 
-  foldAll = (selector?: string) => foldAll(selector, true)
+  foldAll = (selector?: string) => this._foldAll(selector, true)
 
-  unfoldAll = (selector?: string) => foldAll(selector, false)
-}
+  unfoldAll = (selector?: string) => this._foldAll(selector, false)
 
-function makeCollapsible(el: HTMLElement, root: HTMLElement) {
-  if (el.querySelector('.typ-collapsible-btn')) return
+  private _makeCollapsible(el: HTMLElement, root: HTMLElement) {
+    if (el.querySelector('.typ-collapsible-btn')) return
 
-  const button = $(`<button class="typ-collapsible-btn" contenteditable="false" style="left: ${10 - clientOffset(el, root)}px;"><span class="fa fa-caret-down"></span></button>`)
-    .on('click', toggleIcon)
-    .on('click', toggleCollapse)
-    .prependTo(el)
-    .get(0)
+    const offset = 10 - this._clientOffset(el, root)
+    const button = $(`<button class="typ-collapsible-btn" contenteditable="false" style="left: ${offset}px;"><span class="fa fa-caret-down"></span></button>`)
+      .on('click', e => this._toggleIcon(e))
+      .on('click', e => this._toggleCollapse(e))
+      .prependTo(el)
+      .get(0)
 
-  if (el.nextElementSibling?.classList.contains('typ-hidden')) {
-    el.classList.add('typ-folded')
-    toggleIcon.apply(button)
-  }
-}
-
-function clientOffset(el: HTMLElement, root: HTMLElement) {
-  let result = 0;
-  let parent = el;
-  while (parent && parent != root) {
-    result += parent.offsetLeft;
-    parent = parent.offsetParent as HTMLElement;
-  }
-  return result;
-}
-
-function toggleIcon() {
-  $(this).find('.fa')
-    .toggleClass('fa-caret-down')
-    .toggleClass('fa-caret-right')
-}
-
-function toggleCollapse() {
-  const heading = this.parentElement
-  heading.classList.toggle('typ-folded')
-
-  const states = [headingState(heading)]
-  const brothers = $(`[cid=${heading.getAttribute('cid')}] ~ *`)
-
-  for (let i = 0; i < brothers.length; i++) {
-    const el = brothers[i]
-
-    if (/^H[1-6]$/.test(el.tagName)) {
-      const current = headingState(el)
-      if (current.level <= states[0].level) {
-        // Unfold last empty line
-        const prev = brothers[i - 1]
-        if (prev.textContent === '') {
-          prev.classList.remove('typ-hidden')
-        }
-        return
-      }
-
-      while (current.level <= states.at(-1)!.level)
-        states.pop()
-
-      fold(el, states)
-
-      states.push(current)
-
-      continue
+    if (el.nextElementSibling?.classList.contains('typ-hidden')) {
+      el.classList.add('typ-folded')
+      this._toggleIcon({ currentTarget: button } as unknown as JQuery.Event)
     }
-    fold(el, states)
-  }
-}
-
-type HeadingState = { level: number, isFolded: boolean }
-
-function headingState(el: HTMLElement): HeadingState {
-  return {
-    level: +el.tagName[1],
-    isFolded: el.classList.contains('typ-folded')
-  }
-}
-
-function fold(el: HTMLElement, states: HeadingState[]) {
-  el.classList.toggle('typ-hidden', states.some(s => s.isFolded))
-}
-
-function foldAll(typeSelector = '', state: boolean) {
-  let stateCls = '.typ-folded'
-
-  if (state) {
-    // fold unfolded list
-    stateCls = `:not(${stateCls})`
   }
 
-  editor.writingArea.querySelectorAll(`${typeSelector}${stateCls} .typ-collapsible-btn`)
-    .forEach((btn: HTMLElement) => btn.click())
+  private _clientOffset(el: HTMLElement, root: HTMLElement) {
+    let result = 0;
+    let parent = el;
+    while (parent && parent != root) {
+      result += parent.offsetLeft;
+      parent = parent.offsetParent as HTMLElement;
+    }
+    return result;
+  }
+
+  private _toggleIcon(e: JQuery.Event) {
+    $(e.currentTarget).find('.fa')
+      .toggleClass('fa-caret-down')
+      .toggleClass('fa-caret-right')
+  }
+
+  private _toggleCollapse(e: JQuery.Event) {
+    const heading = (e.currentTarget as HTMLElement).parentElement!
+    heading.classList.toggle('typ-folded')
+
+    const states = [this._headingState(heading)]
+    const brothers = $(`[cid=${heading.getAttribute('cid')}] ~ *`)
+
+    for (let i = 0; i < brothers.length; i++) {
+      const el = brothers[i]
+
+      if (/^H[1-6]$/.test(el.tagName)) {
+        const current = this._headingState(el)
+        if (current.level <= states[0].level) {
+          // Unfold last empty line
+          const prev = brothers[i - 1]
+          if (prev.textContent === '') {
+            prev.classList.remove('typ-hidden')
+          }
+          return
+        }
+
+        while (current.level <= states.at(-1)!.level)
+          states.pop()
+
+        this._fold(el, states)
+
+        states.push(current)
+
+        continue
+      }
+      this._fold(el, states)
+    }
+  }
+
+  private _headingState(el: HTMLElement): HeadingState {
+    return {
+      level: +el.tagName[1],
+      isFolded: el.classList.contains('typ-folded')
+    }
+  }
+
+  private _fold(el: HTMLElement, states: HeadingState[]) {
+    el.classList.toggle('typ-hidden', states.some(s => s.isFolded))
+  }
+
+  private _foldAll(typeSelector = '', state: boolean) {
+    let stateCls = '.typ-folded'
+
+    if (state) {
+      // fold unfolded list
+      stateCls = `:not(${stateCls})`
+    }
+
+    editor.writingArea.querySelectorAll(`${typeSelector}${stateCls} .typ-collapsible-btn`)
+      .forEach(btn => (btn as HTMLElement).click())
+  }
 }
