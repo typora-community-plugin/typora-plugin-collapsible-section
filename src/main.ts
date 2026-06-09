@@ -1,5 +1,6 @@
 import './style.scss'
 import { Plugin, PluginSettings } from '@typora-community-plugin/core'
+import { Settings, DEFAULT_SETTINGS } from './settings'
 import { createI18n } from './i18n'
 import { CollapsibleSettingTab } from './setting-tab'
 import {
@@ -13,65 +14,6 @@ import { CodeblockToggler } from './features/codeblock'
 import { TableToggler } from './features/table'
 
 
-interface Settings {
-  collapsableH1: boolean,
-  collapsableH2: boolean,
-  collapsableH3: boolean,
-  collapsableH4: boolean,
-  collapsableH5: boolean,
-  collapsableH6: boolean,
-  collapsableList: boolean,
-  collapsablePlainQuoteblock: boolean,
-  collapsableCallout: boolean,
-  collapsableCodeblock: boolean,
-  collapsableTable: boolean,
-  globH1: string,
-  globH2: string,
-  globH3: string,
-  globH4: string,
-  globH5: string,
-  globH6: string,
-  globList: string,
-  globPlainQuoteblock: string,
-  globCallout: string,
-  globCodeblock: string,
-  globTable: string,
-  collapsableCodeblockMode: 'none' | 'fold' | 'limit_height',
-  autoFoldCodeblock: boolean,
-  lineCountLimit: number,
-  foldedCodeblockStyle: 'lang' | 'first_line',
-  codeblockMaxHeight: string,
-}
-
-const DEFAULT_SETTINGS: Settings = {
-  collapsableH1: true,
-  collapsableH2: true,
-  collapsableH3: true,
-  collapsableH4: true,
-  collapsableH5: true,
-  collapsableH6: true,
-  collapsableList: true,
-  collapsablePlainQuoteblock: true,
-  collapsableCallout: true,
-  collapsableCodeblock: true,
-  collapsableTable: true,
-  globH1: '',
-  globH2: '',
-  globH3: '',
-  globH4: '',
-  globH5: '',
-  globH6: '',
-  globList: '',
-  globPlainQuoteblock: '',
-  globCallout: '',
-  globCodeblock: '',
-  globTable: '',
-  collapsableCodeblockMode: 'none',
-  autoFoldCodeblock: false,
-  lineCountLimit: 10,
-  foldedCodeblockStyle: 'lang',
-  codeblockMaxHeight: '30vh',
-}
 
 export default class CollapsibleSectionPlugin extends Plugin<Settings> {
 

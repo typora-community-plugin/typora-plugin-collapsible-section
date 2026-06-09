@@ -1,5 +1,5 @@
 ---
-collapsableSection: [h1, h2, h3]
+collapsableSections: [h1, h2, h3]
 ---
 
 # Heading 1
