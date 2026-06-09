@@ -3,7 +3,7 @@ import type Plugin from "src/main"
 import {
   SELECTORS, createCollapsibleButton, toggleCaretIcon, toggleSimpleCollapse, foldAll, cleanupCollapsible,
 } from "./shared"
-import { matchesGlob, isSectionPermitted } from "src/utils"
+import { matchesGlob } from "src/utils"
 
 
 export class ListToggler extends Component {
@@ -30,7 +30,7 @@ export class ListToggler extends Component {
           process: (el, { containerEl }) => {
             const filePath = app.workspace.activeFile
             if (!matchesGlob(filePath, this.plugin.settings.get('globList'))) return
-            if (!isSectionPermitted(filePath, 'list')) return
+            if (!this.plugin.isSectionPermitted(filePath, 'list')) return
             this._makeCollapsible(el, containerEl)
           },
         })))

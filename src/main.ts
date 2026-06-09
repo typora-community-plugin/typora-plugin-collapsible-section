@@ -1,5 +1,5 @@
 import './style.scss'
-import { Plugin, PluginSettings } from '@typora-community-plugin/core'
+import { Notice, app, path, Plugin, PluginSettings } from '@typora-community-plugin/core'
 import { Settings, DEFAULT_SETTINGS } from './settings'
 import { createI18n } from './i18n'
 import { CollapsibleSettingTab } from './setting-tab'
@@ -14,6 +14,7 @@ import { CodeblockToggler } from './features/codeblock'
 import { TableToggler } from './features/table'
 
 
+let _metadataWarningShown = false
 
 export default class CollapsibleSectionPlugin extends Plugin<Settings> {
 
@@ -100,5 +101,37 @@ export default class CollapsibleSectionPlugin extends Plugin<Settings> {
       scope: 'editor',
       callback: () => headingLevelTogglers.forEach(t => t.unfoldAll()),
     })
+  }
+
+  /**
+   * Check if a foldable section type is permitted for a file via frontmatter.
+   * @param filePath       - The path to check against the metadata cache.
+   * @param sectionType    - A single section type, e.g. 'h2', 'list', 'table'.
+   * @returns true when no frontmatter config exists at all (opt-in: all types are permitted).
+   */
+  isSectionPermitted(filePath: string, sectionType: string): boolean {
+    if (!filePath) return true
+
+    const relativePath = path.isAbsolute(filePath) ? path.relative(app.vault.path, filePath) : filePath
+    const entry = app.metadata?.cache[relativePath]
+    if (!entry || typeof entry !== 'object') {
+      if (!_metadataWarningShown && !app.internalPlugins.enabledPlugins['internal.metadata']) {
+        _metadataWarningShown = true
+        Notice.warning('[Collapsible Section]<br>' + this.i18n.t.metadataWarningDesc, 0)
+        return true
+      }
+      return true
+    }
+
+    const fm = entry?.metadata?.frontmatter
+    if (!fm) return true
+
+    const uncollapsable = fm.uncollapsableSections
+    if (Array.isArray(uncollapsable)) {
+      return !uncollapsable.includes(sectionType)
+    }
+
+    if (!Array.isArray(fm.collapsableSections)) return true
+    return fm.collapsableSections.includes(sectionType)
   }
 }

@@ -4,7 +4,7 @@ import {
   createCollapsibleButton, toggleCaretIcon, foldAll, cleanupCollapsible,
 } from "../shared"
 import { toggleHeadingCollapse } from "./shared"
-import { matchesGlob, isSectionPermitted } from "src/utils"
+import { matchesGlob } from "src/utils"
 
 
 type HeadingSettingKey = `collapsableH${1 | 2 | 3 | 4 | 5 | 6}`
@@ -62,7 +62,7 @@ export class HeadingLevelToggler extends Component {
           process: (el, { containerEl }) => {
             const filePath = app.workspace.activeFile
             if (!matchesGlob(filePath, this.plugin.settings.get(this.globKey))) return
-            if (!isSectionPermitted(filePath, `h${this.level}`)) return
+            if (!this.plugin.isSectionPermitted(filePath, `h${this.level}`)) return
             this._makeCollapsible(el, containerEl)
           },
         })))

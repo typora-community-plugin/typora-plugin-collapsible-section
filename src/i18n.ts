@@ -60,6 +60,8 @@ export const i18nResources = {
     codeblockFoldBtn: 'Fold/Unfold code block',
 
     tableFoldBtn: 'Toggle table',
+
+    metadataWarningDesc: "'metadata' internal plugin is disabled. Frontmatter-based `collapsableSections`/`uncollapsableSections` rules will no longer take effect.",
   },
   'zh-cn': {
     foldAll: '折叠所有',
@@ -120,6 +122,8 @@ export const i18nResources = {
     codeblockFoldBtn: '折叠/展开代码块',
 
     tableFoldBtn: '折叠/展开表格',
+
+    metadataWarningDesc: '内部插件`元数据`已禁用。基于 FrontMatter 的 `collapsableSections`/`  uncollapsableSections` 规则将不再生效。',
   },
 }
 

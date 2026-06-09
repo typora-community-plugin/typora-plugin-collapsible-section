@@ -1,7 +1,7 @@
 import { app, App, CodeblockPostProcessor, Component } from "@typora-community-plugin/core"
 import { editor } from "typora"
 import type Plugin from "src/main"
-import { matchesGlob, isSectionPermitted } from "src/utils"
+import { matchesGlob } from "src/utils"
 
 
 const CSS_VAR_MAX_HEIGHT = '--typ-codeblock-max-height'
@@ -100,7 +100,7 @@ export class CodeblockToggler extends Component {
 
             const filePath = app.workspace.activeFile
             if (!matchesGlob(filePath, that.plugin.settings.get('globCodeblock'))) return
-            if (!isSectionPermitted(filePath, 'codeblock')) return
+            if (!that.plugin.isSectionPermitted(filePath, 'codeblock')) return
 
             this.renderButton(el, this.button!)
 
