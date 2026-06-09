@@ -48,8 +48,8 @@ importers:
         specifier: npm:@typora-community-plugin/typora-types@^1.0.13
         version: '@typora-community-plugin/typora-types@1.0.13'
       '@typora-community-plugin/core':
-        specifier: ^2.5.19
-        version: 2.5.19
+        specifier: ^2.9.0
+        version: 2.9.0
       archiver:
         specifier: ^5.3.2
         version: 5.3.2
@@ -820,8 +820,8 @@ packages:
     resolution: {integrity: sha512-dfUnCxiN9H4ap84DvD2ubjw+3vUNpstxa0TneY/Paat8a3R4uQZDLSvWjmznAY/DoahqTHl9V46HF/Zs3F29pg==}
     engines: {node: '>= 10.0.0'}
 
-  '@plylrnsdy/decorate.js@1.0.1':
-    resolution: {integrity: sha512-bXwea+WJ3GOJDnXnzmhK1fUJnSOBiN/mjaPNryY+Shy0hPS1qr3cngsWOGEOgCddBFzef5cELObC6HDlIQ8Uxg==}
+  '@plylrnsdy/decorate.js@1.0.4':
+    resolution: {integrity: sha512-Sj6CnM2NC4vuTUYoGtxSOrlehfaQRariXIZ1L4TyQEls7r1eXahYgXcJkwqP+2g+v+NHyM1lXwZOOs5iic4P+Q==}
 
   '@rollup/plugin-babel@6.0.4':
     resolution: {integrity: sha512-YF7Y52kFdFT/xVSuVdjkV5ZdX/3YtmX0QulG+x0taQOtJdHYzVU61aSSkAgVJ7NOv6qPkIYiJSgSWWN/DM5sGw==}
@@ -1032,8 +1032,8 @@ packages:
   '@types/tern@0.23.9':
     resolution: {integrity: sha512-ypzHFE/wBzh+BlH6rrBgS5I/Z7RD21pGhZ2rltb/+ZrVM1awdZwjx7hE5XfuYgHWk9uvV5HLZN3SloevCAp3Bw==}
 
-  '@typora-community-plugin/core@2.5.19':
-    resolution: {integrity: sha512-qDgl/VjPtYY+t/coOwB+JMZN4szvY0nFHS0sWY1GVoSY8dNhY2mIim4WRVrzbu31wZkFNYMPpmb3FLmLANfDLg==}
+  '@typora-community-plugin/core@2.9.0':
+    resolution: {integrity: sha512-18fupvYHHmebSIipRhxCDK8IssrnlIKiwq5XUovuNZKQZ6nz2ixsUbn2vKmkiUlF/+bqSJSA7SoF2SQdwgtmfQ==}
 
   '@typora-community-plugin/esbuild-plugin-typora@1.0.12':
     resolution: {integrity: sha512-iOEM8e0Y7/83dqVHm2HX9XglL0BD0t4NTbH4PKtea7ohrOxI/frkWb4nHW4iMoxp5mVBdCf5QUpcm3H6DeIfdQ==}
@@ -2325,7 +2325,7 @@ snapshots:
       '@parcel/watcher-win32-x64': 2.5.1
     optional: true
 
-  '@plylrnsdy/decorate.js@1.0.1':
+  '@plylrnsdy/decorate.js@1.0.4':
     dependencies:
       typescript: 5.9.2
 
@@ -2472,9 +2472,9 @@ snapshots:
     dependencies:
       '@types/estree': 1.0.8
 
-  '@typora-community-plugin/core@2.5.19':
+  '@typora-community-plugin/core@2.9.0':
     dependencies:
-      '@plylrnsdy/decorate.js': 1.0.1
+      '@plylrnsdy/decorate.js': 1.0.4
 
   '@typora-community-plugin/esbuild-plugin-typora@1.0.12': {}
 

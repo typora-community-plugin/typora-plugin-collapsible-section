@@ -1,3 +1,7 @@
+---
+collapsableSection: [h1, h2, h3]
+---
+
 # Heading 1
 
 ## Heading 2.1

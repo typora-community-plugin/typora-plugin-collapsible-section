@@ -1,3 +1,5 @@
+import { app, path } from "@typora-community-plugin/core"
+
 /**
  * Expand brace expressions like {a,b,c} into multiple patterns.
  * Only handles top-level braces (no nesting).
@@ -161,3 +163,34 @@ export function matchesGlob(filePath: string, patterns: string): boolean {
 
   return false
 }
+
+/** Type of the Typora app global from @typora-community-plugin/core */
+export interface TyporaApp {
+  metadata: any,
+}
+
+/**
+ * Check if a foldable section type is permitted for a file via frontmatter.
+ * @param filePath       - The path to check against the metadata cache.
+ * @param sectionType    - A single section type, e.g. 'h2', 'list', 'table'.
+ * @returns true when no frontmatter config exists at all (opt-in: all types are permitted).
+ */
+export function isSectionPermitted(filePath: string, sectionType: string): boolean {
+  if (!filePath) return true
+
+  const relativePath = path.isAbsolute(filePath) ? path.relative(app.vault.path, filePath) : filePath
+  const entry = app.metadata?.cache[relativePath]
+  if (!entry || typeof entry !== 'object') return true
+
+  const fm = entry?.metadata?.frontmatter
+  if (!fm) return true
+
+  const uncollapsable = fm.uncollapsableSections
+  if (Array.isArray(uncollapsable)) {
+    return !uncollapsable.includes(sectionType)
+  }
+
+  if (!Array.isArray(fm.collapsableSections)) return true
+  return fm.collapsableSections.includes(sectionType)
+}
+

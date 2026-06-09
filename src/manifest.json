@@ -7,6 +7,6 @@
   "repo": "typora-community-plugin/typora-plugin-collapsible-section",
   "version": "1.9.2",
   "minAppVersion": "1.5.1",
-  "minCoreVersion": "2.5.19",
+  "minCoreVersion": "2.7.1",
   "platforms": ["win32", "linux", "darwin"]
 }

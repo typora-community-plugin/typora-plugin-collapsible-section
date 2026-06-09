@@ -1,7 +1,7 @@
 import { editor } from "typora"
 import { app, Component, decorate } from "@typora-community-plugin/core"
 import type CollapsibleSectionPlugin from "src/main"
-import { matchesGlob } from "src/utils"
+import { matchesGlob, isSectionPermitted } from "src/utils"
 
 
 export class TableToggler extends Component {
@@ -45,6 +45,7 @@ export class TableToggler extends Component {
 
         const filePath = app.workspace.activeFile
         if (!matchesGlob(filePath, this.plugin.settings.get('globTable'))) return
+        if (!isSectionPermitted(filePath, 'table')) return
 
         const klass = figure.hasClass('typ-folded-table')
           ? 'fa-caret-down'
