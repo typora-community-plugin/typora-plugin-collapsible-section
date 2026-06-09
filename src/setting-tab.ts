@@ -20,7 +20,7 @@ export class CollapsibleSettingTab extends SettingTab {
 
     this.addSetting(setting => {
       setting.addTitle('Features')
-      setting.addDescription(t.globDesc)
+      setting.addDescription(t.featuresDesc)
     })
 
     this.addSetting(setting => {
