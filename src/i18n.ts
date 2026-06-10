@@ -19,7 +19,7 @@ export const i18nResources = {
     foldAllCodeblocks: 'Fold all codeblocks',
     unfoldAllCodeblocks: 'Unfold all codeblocks',
 
-    featuresDesc: '1. Toggle checkbox to enable or disable all collapsible section features globally;\n2. Glob expressions (e.g., `docs/**/*.md`) to limit which files enable this feature. Supported syntax: `*` (any chars except `/`), `**` (any path), `?` (one char), `[abc]` (char class), `{a,b}` (alternation). Leave empty for all files;\n3. Allow per-file control via frontmatter properties `collapsableSections` and `uncollapsableSections`.',
+    featuresDesc: '1. Toggle checkbox to enable or disable all collapsible section features globally;\n2. Glob expressions (e.g., `docs/**/*.md`) to limit which files enable this feature. Supported syntax: `*` (any chars except `/`), `**` (any path), `?` (one char), `[abc]` (char class), `{a,b}` (alternation). Leave empty for all files;\n3. Allow per-file control via frontmatter properties `collapsableSections` and `uncollapsableSections`. Supported values: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "list" | "codeblock" | "table" | "plain_quote_block" | "callout".',
     collapsableH1: 'Enable H1 folding',
     collapsableH2: 'Enable H2 folding',
     collapsableH3: 'Enable H3 folding',
@@ -81,7 +81,7 @@ export const i18nResources = {
     foldAllCodeblocks: '折叠所有代码块',
     unfoldAllCodeblocks: '展开所有代码块',
 
-    featuresDesc: '1. 切换复选框以全局启用或禁用所有可折叠区域功能；\n2. Glob 表达式（例如 `docs/**/*.md`）限制启用此功能的文件。支持语法：`*`（匹配 `/` 外的任意字符）、`**`（匹配任意路径）、`?`（单个字符）、`[abc]`（字符集）、`{a,b}`（多选一）。留空表示所有文件；\n3. 允许通过 frontmatter 属性 `collapsableSections` 和 `uncollapsableSections` 进行逐文件控制。',
+    featuresDesc: '1. 切换复选框以全局启用或禁用所有可折叠区域功能；\n2. Glob 表达式（例如 `docs/**/*.md`）限制启用此功能的文件。支持语法：`*`（匹配 `/` 外的任意字符）、`**`（匹配任意路径）、`?`（单个字符）、`[abc]`（字符集）、`{a,b}`（多选一）。留空表示所有文件；\n3. 允许通过 FrontMatter 属性 `collapsableSections` 和 `uncollapsableSections` 进行逐文件控制。支持的值："h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "list" | "codeblock" | "table" | "plain_quote_block" | "callout"。',
     collapsableH1: '启用 H1 标题折叠',
     collapsableH2: '启用 H2 标题折叠',
     collapsableH3: '启用 H3 标题折叠',

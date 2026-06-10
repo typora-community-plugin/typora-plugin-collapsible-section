@@ -106,10 +106,10 @@ export default class CollapsibleSectionPlugin extends Plugin<Settings> {
   /**
    * Check if a foldable section type is permitted for a file via frontmatter.
    * @param filePath       - The path to check against the metadata cache.
-   * @param sectionType    - A single section type, e.g. 'h2', 'list', 'table'.
+   * @param sectionType    - A single section type.
    * @returns true when no frontmatter config exists at all (opt-in: all types are permitted).
    */
-  isSectionPermitted(filePath: string, sectionType: string): boolean {
+  isSectionPermitted(filePath: string, sectionType: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'list' | 'codeblock' | 'table' | 'plain_quote_block' | 'callout'): boolean {
     if (!filePath) return true
 
     const relativePath = path.isAbsolute(filePath) ? path.relative(app.vault.path, filePath) : filePath
