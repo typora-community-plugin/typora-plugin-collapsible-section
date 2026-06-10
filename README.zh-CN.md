@@ -25,6 +25,22 @@
 | **引用块**                            | **标注块（Callout）**                        |
 | ![](./docs/assets/quoteblock.gif)    | ![](./docs/assets/callout.gif)               |
 
+## 设置
+
+- **全局开关**：通过单一复选框一键启用或禁用所有可折叠区域功能。
+- **Glob 表达式限定文件范围**：使用 Glob 表达式（例如 `docs/**/*.md`）限制插件生效的文件范围。支持通配符（`*`、`**`、`?`）、字符集（`[abc]`）和多选一（`{a,b}`）。留空表示对所有文件生效。
+- **FrontMatter 逐文件控制**：通过 YAML FrontMatter 中的 `collapsableSections` 和 `uncollapsableSections` 键，在逐文件级别启用或禁用特定类型的折叠区域（"h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "list" | "codeblock" | "table" | "plain_quote_block" | "callout"）。如：
+  ```yaml
+  collapsableSections: [h1, h2, h3]
+  ```
+  或者
+  ```yaml
+  uncollapsableSections:
+  - h4
+  - h5
+  - h6
+  ```
+
 ## 安装
 
 1. 安装 [typora-community-plugin][core]

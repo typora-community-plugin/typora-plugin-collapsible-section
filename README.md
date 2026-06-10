@@ -26,6 +26,22 @@ Fold/unfold markdown section:
 | ![](./docs/assets/quoteblock.gif)    | ![](./docs/assets/callout.gif)               |
 
 
+## Settings
+
+- **Global toggle**: Enable or disable all collapsible section features with a single checkbox.
+- **File scoping with Glob**: Restrict the plugin to specific files using glob expressions (e.g., `docs/**/*.md`). Supports wildcards (`*`, `**`, `?`), character classes (`[abc]`), and alternation (`{a,b}`). Leave empty to apply to all files.
+- **Per-file control via FrontMatter**: Use `collapsableSections` and `uncollapsableSections` keys in YAML frontmatter to enable or disable specific section types ("h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "list" | "codeblock" | "table" | "plain_quote_block" | "callout") on a per-file basis. For example:
+  ```yaml
+  collapsableSections: [h1, h2, h3]
+  ```
+  Or:
+  ```yaml
+  uncollapsableSections:
+  - h4
+  - h5
+  - h6
+  ```
+
 ## Install
 
 1. Install [typora-community-plugin][core]
