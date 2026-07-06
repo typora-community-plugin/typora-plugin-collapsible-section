@@ -1,0 +1,59 @@
+{
+  "foldAll": "折叠所有",
+  "unfoldAll": "展开所有",
+  "foldAllHeadings": "折叠所有标题",
+  "unfoldAllHeadings": "展开所有标题",
+  "foldAllHeadingN": "折叠所有 H{0} 标题",
+  "unfoldAllHeadingN": "展开所有 H{0} 标题",
+  "foldAllTables": "折叠所有表格",
+  "unfoldAllTables": "展开所有表格",
+  "foldAllQuoteBlocks": "折叠所有引用块和标注块",
+  "unfoldAllQuoteBlocks": "展开所有引用块和标注块",
+  "foldAllPlainQuoteBlocks": "折叠所有引用块",
+  "unfoldAllPlainQuoteBlocks": "展开所有引用块",
+  "foldAllCallouts": "折叠所有标注块",
+  "unfoldAllCallouts": "展开所有标注块",
+  "foldAllCodeblocks": "折叠所有代码块",
+  "unfoldAllCodeblocks": "展开所有代码块",
+  "featuresDesc": "1. 切换复选框以全局启用或禁用所有可折叠区域功能；\n2. Glob 表达式（例如 `docs/**/*.md`）限制启用此功能的文件。支持语法：`*`（匹配 `/` 外的任意字符）、`**`（匹配任意路径）、`?`（单个字符）、`[abc]`（字符集）、`{a,b}`（多选一）。留空表示所有文件；\n3. 允许通过 FrontMatter 属性 `collapsableSections` 和 `uncollapsableSections` 进行逐文件控制。支持的值：\"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\" | \"h6\" | \"list\" | \"codeblock\" | \"table\" | \"plain_quote_block\" | \"callout\"。",
+  "collapsableH1": "启用 H1 标题折叠",
+  "collapsableH2": "启用 H2 标题折叠",
+  "collapsableH3": "启用 H3 标题折叠",
+  "collapsableH4": "启用 H4 标题折叠",
+  "collapsableH5": "启用 H5 标题折叠",
+  "collapsableH6": "启用 H6 标题折叠",
+  "collapsableList": "启用列表折叠",
+  "collapsablePlainQuoteblock": "启用纯引用块折叠",
+  "collapsableCallout": "启用标注块折叠",
+  "collapsableCodeblock": {
+    "name": "启用代码块折叠",
+    "desc": "支持配置折叠模式"
+  },
+  "collapsableTable": {
+    "name": "启用表格折叠",
+    "desc": "允许通过表编辑工具栏中的切换按钮折叠/展开表格。"
+  },
+  "collapsibleCodeblockMode": {
+    "name": "代码块折叠模式",
+    "desc": "- none: 禁用代码块折叠\n - fold: 折叠代码块到 1 行\n - limit_height: 限制代码块最大高度"
+  },
+  "autoFoldCodeblock": {
+    "name": "自动折叠代码块",
+    "desc": "当代码块行数超过限制时折叠代码块。仅在 `fold` 或 `limit_height` 模式下生效"
+  },
+  "lineCountLimit": {
+    "name": "自动折叠行数限制",
+    "desc": "代码块行数大于或等于该限制时自动折叠"
+  },
+  "foldedCodeblockStyle": {
+    "name": "折叠代码块样式",
+    "desc": "仅在 `fold` 模式下生效"
+  },
+  "codeblockMaxHeight": {
+    "name": "代码块最大高度",
+    "desc": "仅在 `limit_height` 模式下生效"
+  },
+  "codeblockFoldBtn": "折叠/展开代码块",
+  "tableFoldBtn": "折叠/展开表格",
+  "metadataWarningDesc": "内部插件`元数据`已禁用。基于 FrontMatter 的 `collapsableSections`/`uncollapsableSections` 规则将不再生效。"
+}

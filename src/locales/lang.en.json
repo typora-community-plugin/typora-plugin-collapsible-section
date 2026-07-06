@@ -1,0 +1,59 @@
+{
+  "foldAll": "Fold all",
+  "unfoldAll": "Unfold all",
+  "foldAllHeadings": "Fold all headings",
+  "unfoldAllHeadings": "Unfold all headings",
+  "foldAllHeadingN": "Fold all H{0}",
+  "unfoldAllHeadingN": "Unfold all H{0}",
+  "foldAllTables": "Fold all tables",
+  "unfoldAllTables": "Unfold all tables",
+  "foldAllQuoteBlocks": "Fold all quoteblocks & callouts",
+  "unfoldAllQuoteBlocks": "Unfold all quoteblocks & callouts",
+  "foldAllPlainQuoteBlocks": "Fold all quoteblocks",
+  "unfoldAllPlainQuoteBlocks": "Unfold all quoteblocks",
+  "foldAllCallouts": "Fold all callouts",
+  "unfoldAllCallouts": "Unfold all callouts",
+  "foldAllCodeblocks": "Fold all codeblocks",
+  "unfoldAllCodeblocks": "Unfold all codeblocks",
+  "featuresDesc": "1. Toggle checkbox to enable or disable all collapsible section features globally;\n2. Glob expressions (e.g., `docs/**/*.md`) to limit which files enable this feature. Supported syntax: `*` (any chars except `/`), `**` (any path), `?` (one char), `[abc]` (char class), `{a,b}` (alternation). Leave empty for all files;\n3. Allow per-file control via frontmatter properties `collapsableSections` and `uncollapsableSections`. Supported values: \"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\" | \"h6\" | \"list\" | \"codeblock\" | \"table\" | \"plain_quote_block\" | \"callout\".",
+  "collapsableH1": "Enable H1 folding",
+  "collapsableH2": "Enable H2 folding",
+  "collapsableH3": "Enable H3 folding",
+  "collapsableH4": "Enable H4 folding",
+  "collapsableH5": "Enable H5 folding",
+  "collapsableH6": "Enable H6 folding",
+  "collapsableList": "Enable list folding",
+  "collapsablePlainQuoteblock": "Enable plain quoteblock folding",
+  "collapsableCallout": "Enable callout folding",
+  "collapsableCodeblock": {
+    "name": "Enable code block folding",
+    "desc": "Support configuring the fold mode."
+  },
+  "collapsableTable": {
+    "name": "Enable table folding",
+    "desc": "Allow tables to be folded/unfolded via the toggle button in the table edit toolbar."
+  },
+  "collapsibleCodeblockMode": {
+    "name": "Collapsible code block mode",
+    "desc": "- none: disable collapsible code block\n - fold: code blocks will be folded in one line\n - limit_height: code blocks will be limited to a certain height"
+  },
+  "autoFoldCodeblock": {
+    "name": "Fold code block automatically",
+    "desc": "Fold code block which line count is more than the limit. Only works when mode `fold` or `limit_height` is enabled."
+  },
+  "lineCountLimit": {
+    "name": "Line count limit for auto fold",
+    "desc": "The minimum line count of code block which can be folded automatically."
+  },
+  "foldedCodeblockStyle": {
+    "name": "Folded codeblock style",
+    "desc": "Only works when mode `fold` is enabled"
+  },
+  "codeblockMaxHeight": {
+    "name": "Code block max height",
+    "desc": "Only works when mode `limit_height` is enabled"
+  },
+  "codeblockFoldBtn": "Fold/Unfold code block",
+  "tableFoldBtn": "Toggle table",
+  "metadataWarningDesc": "'metadata' internal plugin is disabled. Frontmatter-based `collapsableSections`/`uncollapsableSections` rules will no longer take effect."
+}

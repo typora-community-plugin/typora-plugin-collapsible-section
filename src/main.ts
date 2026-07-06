@@ -1,7 +1,7 @@
 import './style.scss'
-import { Notice, app, path, Plugin, PluginSettings } from '@typora-community-plugin/core'
+import { I18n, Notice, app, path, Plugin, PluginSettings } from '@typora-community-plugin/core'
 import { Settings, DEFAULT_SETTINGS } from './settings'
-import { createI18n } from './i18n'
+import * as Locale from './locales/lang.en.json'
 import { CollapsibleSettingTab } from './setting-tab'
 import {
   HeadingLevelToggler,
@@ -18,7 +18,9 @@ let _metadataWarningShown = false
 
 export default class CollapsibleSectionPlugin extends Plugin<Settings> {
 
-  i18n = createI18n()
+  i18n = new I18n<typeof Locale>({
+    localePath: path.join(this.manifest.dir!, 'locales')
+  })
 
   onload() {
     const { t } = this.i18n
