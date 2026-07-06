@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '[0-9]*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --no-frozen-lockfile
+
+      - run: pnpm run pack
+
+      - name: Generate release body
+        run: |
+          tag="${{ github.ref_name }}"
+          prev_tag=$(git describe --tags --abbrev=0 "$tag^" 2>/dev/null || echo "")
+          if [ -n "$prev_tag" ]; then
+            echo "## What's Changed" > release_body.md
+            git log "$prev_tag..$tag" --oneline --no-decorate >> release_body.md
+          else
+            echo "## Initial release" > release_body.md
+            git log --oneline --no-decorate "$tag" >> release_body.md
+          fi
+
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          gh release create "${{ github.ref_name }}"
+          --title "${{ github.ref_name }}"
+          --notes-file release_body.md
+          --verify-tag
+          plugin.zip
