@@ -1,0 +1,59 @@
+{
+  "foldAll": "Alle einklappen",
+  "unfoldAll": "Alle ausklappen",
+  "foldAllHeadings": "Alle Überschriften einklappen",
+  "unfoldAllHeadings": "Alle Überschriften ausklappen",
+  "foldAllHeadingN": "Alle H{0} einklappen",
+  "unfoldAllHeadingN": "Alle H{0} ausklappen",
+  "foldAllTables": "Alle Tabellen einklappen",
+  "unfoldAllTables": "Alle Tabellen ausklappen",
+  "foldAllQuoteBlocks": "Alle Zitatblöcke & Callouts einklappen",
+  "unfoldAllQuoteBlocks": "Alle Zitatblöcke & Callouts ausklappen",
+  "foldAllPlainQuoteBlocks": "Alle Zitatblöcke einklappen",
+  "unfoldAllPlainQuoteBlocks": "Alle Zitatblöcke ausklappen",
+  "foldAllCallouts": "Alle Callouts einklappen",
+  "unfoldAllCallouts": "Alle Callouts ausklappen",
+  "foldAllCodeblocks": "Alle Codeblöcke einklappen",
+  "unfoldAllCodeblocks": "Alle Codeblöcke ausklappen",
+  "featuresDesc": "1. Aktivieren oder deaktivieren Sie alle einklappbaren Bereichsfunktionen global mit dem Kontrollkästchen;\n2. Glob-Ausdrücke (z. B. `docs/**/*.md`), um einzuschränken, welche Dateien diese Funktion aktivieren. Unterstützte Syntax: `*` (beliebige Zeichen außer `/`), `**` (beliebiger Pfad), `?` (ein Zeichen), `[abc]` (Zeichenschlüssel), `{a,b}` (Alternation). Leer lassen für alle Dateien;\n3. Ermöglicht die Steuerung pro Datei über Frontmatter-Eigenschaften `collapsableSections` und `uncollapsableSections`. Unterstützte Werte: \"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\" | \"h6\" | \"list\" | \"codeblock\" | \"table\" | \"plain_quote_block\" | \"callout\".",
+  "collapsableH1": "H1-Einfachung aktivieren",
+  "collapsableH2": "H2-Einfachung aktivieren",
+  "collapsableH3": "H3-Einfachung aktivieren",
+  "collapsableH4": "H4-Einfachung aktivieren",
+  "collapsableH5": "H5-Einfachung aktivieren",
+  "collapsableH6": "H6-Einfachung aktivieren",
+  "collapsableList": "Listeneinfachung aktivieren",
+  "collapsablePlainQuoteblock": "Einfachheit von einfachen Zitaten aktivieren",
+  "collapsableCallout": "Callout-Einfachung aktivieren",
+  "collapsableCodeblock": {
+    "name": "Codeblock-Einfachung aktivieren",
+    "desc": "Unterstützung der Konfiguration des Einfacheitsmodus."
+  },
+  "collapsableTable": {
+    "name": "Tabelleneinfachung aktivieren",
+    "desc": "Ermöglichen, dass Tabellen über den Schaltfläche im Tabellen-Bearbeitungs-Toolbar eingefaltet/ausgeklappt werden können."
+  },
+  "collapsibleCodeblockMode": {
+    "name": "Modus für einklappbare Codeblöcke",
+    "desc": "- none: deaktivi Ein-/Ausklappen von Codeblöcken\n - fold: Codeblöcke werden in einer Zeile eingefaltet\n - limit_height: Codeblöcke werden auf eine bestimmte Höhe beschränkt"
+  },
+  "autoFoldCodeblock": {
+    "name": "Codeblock automatisch einklappen",
+    "desc": "Klappt den Codeblock ein, wenn die Zeilenanzahl das Limit überschreitet. Funktionsfähig nur bei Aktivierung des 'fold'- oder 'limit_height' Mode."
+  },
+  "lineCountLimit": {
+    "name": "Zeilenbegrenzung für automatisches Ein-/Ausklappen",
+    "desc": "Die minimale Zeilenanzahl des Codeblocks, der automatisch eingefaltet werden kann."
+  },
+  "foldedCodeblockStyle": {
+    "name": "Stil des eingeklappten Codeblocks",
+    "desc": "Funktioniert nur wenn 'fold' aktiv ist"
+  },
+  "codeblockMaxHeight": {
+    "name": "Maximale Höhe des Codeblocks",
+    "desc": "Funktioniert nur wenn 'limit_height' aktiv ist"
+  },
+  "codeblockFoldBtn": "Codeblock ein-/ausklappen",
+  "tableFoldBtn": "Tabelle umschalten",
+  "metadataWarningDesc": "'metadata'-Internal-Plugin ist deaktiviert. Frontmatter-basierte `collapsableSections`/`uncollapsableSections` Regeln werden nicht mehr beachtet."
+}
