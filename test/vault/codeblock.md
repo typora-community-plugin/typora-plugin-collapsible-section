@@ -29,3 +29,19 @@ int main()
 }
 ```
 
+codeblock with preview
+
+
+```mermaid
+graph TD;
+
+
+  A[Start] --> B{Do it?};
+  
+  
+  B -- Yes --> C(Ok);
+  
+  
+  B -- No --> D(Stop);
+```
+

@@ -23,19 +23,6 @@
       color: rgb(var(--typ-color-gray-2));
     }
 
-    .CodeMirror-linenumbers {
-      display: none;
-    }
-    .CodeMirror-sizer {
-      margin-left: 0 !important;
-    }
-    .CodeMirror-gutter-wrapper {
-      display: none;
-    }
-    .CodeMirror-gutters {
-      border: 0;
-    }
-
     .CodeMirror-wrap {
       max-height: 1.5rem;
     }
